@@ -59,9 +59,6 @@ void leerArchivo()
 						{
 							wcout << word << "\n";  //Realmente acá iría el insertar en grafo usar numeroParrafo  
 						}
-						/*
-						
-							*/
 						word.clear();
 					}
 				}
