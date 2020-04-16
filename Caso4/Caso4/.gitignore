@@ -20,7 +20,13 @@
 *.suo
 *.ipch
 *.filters
-*.vcxproj.*
+*.vcxproj
+*.pdb
+*.obj
+*.enc
+*.tlog
+*.lastbuildstate
+*.log
 *.suo
 *.csproj.user
 *.vbproj.user
