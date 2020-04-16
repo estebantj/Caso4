@@ -14,8 +14,8 @@
 *.a
 
 # Visual Studio Files
-Debug
-Release
+#Debug
+#Release
 *.db
 *.suo
 *.ipch
