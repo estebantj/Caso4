@@ -15,7 +15,7 @@ using namespace std;
 
 void leerArchivo()
 {
-	wifstream archivo("el_quijote.txt");
+	wifstream archivo("Texto.txt");
 	int cantidad = 0;
 	if (archivo.is_open()) {
 
@@ -55,7 +55,7 @@ void leerArchivo()
 							filtroTerminaciones.find(subString3) == filtroTerminaciones.end() &&
 							filtroTerminaciones.find(subString4) == filtroTerminaciones.end())
 						{
-							//wcout << word << "\n";  //Realmente acá iría el insertar en grafo usar numeroParrafo 
+							wcout << word << "\n";  //Realmente acá iría el insertar en grafo usar numeroParrafo 
 							cantidad++;
 						}
 						word.clear();
