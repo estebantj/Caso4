@@ -4,8 +4,13 @@
 
 class Nodo
 {
+public:
+	Nodo(std::wstring pPalabra);
+	
+	void nuevaArista(Nodo* nodoLlegada);
+
 private:
-	std::string palabra;
+	std::wstring palabra;
 	int peso;
 	std::vector< std::pair<Nodo*, int> > aristas;
 	
