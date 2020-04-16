@@ -139,10 +139,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Estructura.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Nodo.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Estructura.h" />
     <ClInclude Include="Nodo.h" />
     <ClInclude Include="Variables.h" />
   </ItemGroup>
