@@ -5,15 +5,12 @@
 #include <codecvt>	
 #include <clocale>
 #include <map>
-
 #include <cstdio>  // for _fileno
 #include <io.h>    // for _setmode
 #include <fcntl.h> // for _O_U16TEXT
-
+#include "Variables.h"
 
 using namespace std;
-
-string fileName = "Texto.txt";
 
 
 void leerArchivo()
@@ -29,39 +26,48 @@ void leerArchivo()
 		wstring word, parrafo;
 		int numeroDeParrafo = 1;
 		wchar_t caracter, bom = L'\0';
-		//Diccionario de palabras por revisar
-
-		map<wstring,char> mapaPalabrasFiltro;
-		wstring palabrasFiltro[20];
-		for (int i = 0;i < 30;i++) {
-
-		}
-		
+				
 		archivo.get(bom);
 
 		while (archivo.get(caracter))
 		{	
 			if (iswalpha(caracter) || caracter == ' ' || caracter == '\n')
 			{
+				caracter = tolower(caracter); // para evitar aumento de comparaciones en el diccionario
 				if (iswalpha(caracter)) word.push_back(caracter);
 
 				else if (caracter == ' ')
 				{
 					if (!word.empty())
 					{
-						int wordSize = word.size();
-						if ( !(mapaPalabrasFiltro.count(word)) ||  //Lee que count es lo mas elegante para maps
- 
-								(wordSize >1 &&
-									( (word[wordSize-2]==L'a' && word[wordSize - 2] == L'a') ||
-									((word[wordSize - 2] == L'a' && word[wordSize - 2] == L'a'))
-									) 
-							    ) 
-						) {
+						size_t wordSize = word.length();
+						if ( ! ((filtro.find(word)) != filtro.end())
 
+							||
+								!( (wordSize >1 && (word.substr(wordSize-2, wordSize-1) == L"ar"))
+									  
+								||
+									
+								( (wordSize > 3) && (word.substr(wordSize - 3, wordSize - 1) == L"cho") )
+								
+								||
+								
+								(wordSize > 4) && word.substr(wordSize - 4, wordSize - 1)  == L"ando")
+									
+								||
+
+								((wordSize > 5) && word.substr(wordSize - 5, wordSize - 1)  == L"iendo")						
+							) 
+						{
 							wcout << word << "\n";  //Realmente acá iría el insertar en grafo usar numeroParrafo  
 						}
-
+						/*
+						(word.substr(wordSize - 2, wordSize - 1) == L"ir") ||
+							(word.substr(wordSize - 2, wordSize - 1) == L"er") ||
+							(word.substr(wordSize - 2, wordSize - 1) == L"so") ||
+							(word.substr(wordSize - 2, wordSize - 1) == L"to")
+							))
+							*/
 						word.clear();
 					}
 					// Se verifica si word es un sustantivo
