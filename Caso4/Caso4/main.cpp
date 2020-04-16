@@ -15,8 +15,8 @@ using namespace std;
 
 void leerArchivo()
 {
-	wifstream archivo("Texto.txt");
-
+	wifstream archivo("el_quijote.txt");
+	int cantidad = 0;
 	if (archivo.is_open()) {
 
 		// Dar formato utf-8
@@ -43,27 +43,27 @@ void leerArchivo()
 					if (!word.empty())
 					{
 						size_t wordSize = word.length();
-						if (wordSize > 1)
-						{
-							wstring subWord = word.substr(wordSize - 2, wordSize - 1);
-						}
+						// Terminaciones
+						wstring subString1 = wordSize > 1 ? word.substr(wordSize - 2, wordSize - 1) : L"";
+						wstring subString2 = wordSize > 2 ? word.substr(wordSize - 3, wordSize - 1) : L"";
+						wstring subString3 = wordSize > 3 ? word.substr(wordSize - 4, wordSize - 1) : L"";
+						wstring subString4 = wordSize > 4 ? word.substr(wordSize - 5, wordSize - 1) : L"";
+
 						if ((filtro.find(word) == filtro.end()) &&
-							(wordSize > 1 ) && (word.substr(wordSize - 2, wordSize - 1) != L"ar") &&
-							(word.substr(wordSize - 2, wordSize - 1) != L"ir") &&
-							(word.substr(wordSize - 2, wordSize - 1) != L"er") &&
-							(word.substr(wordSize - 2, wordSize - 1) != L"so") &&
-							(word.substr(wordSize - 2, wordSize - 1) != L"to") &&
-							(wordSize > 3) && (word.substr(wordSize - 3, wordSize - 1) != L"cho") &&
-							(wordSize > 4) && (word.substr(wordSize - 4, wordSize - 1) != L"ando") &&
-							(wordSize > 5) && (word.substr(wordSize - 5, wordSize - 1) != L"iendo") )
+							filtroTerminaciones.find(subString1) == filtroTerminaciones.end() &&
+							filtroTerminaciones.find(subString2) == filtroTerminaciones.end() &&
+							filtroTerminaciones.find(subString3) == filtroTerminaciones.end() &&
+							filtroTerminaciones.find(subString4) == filtroTerminaciones.end())
 						{
-							wcout << word << "\n";  //Realmente acá iría el insertar en grafo usar numeroParrafo  
+							//wcout << word << "\n";  //Realmente acá iría el insertar en grafo usar numeroParrafo 
+							cantidad++;
 						}
 						word.clear();
 					}
 				}
 			}
 		}
+		wcout << L"cantidad: " << to_wstring(cantidad) << endl;
 
 	}
 	else

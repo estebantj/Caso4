@@ -6,7 +6,8 @@
 #include <unordered_set>
 #include <string>
 
-const std::unordered_set <std::wstring> filtro 
+// Pronombres, adverbios...
+const std::unordered_set <std::wstring> filtro
 ({ L"el",L"al",L"la",L"lo",L"los",L"las",L"un",
 	L"una",L"unos",L"unas",L"y",L"a",L"ante",L"bajo",
 	L"cabe",L"con",L"contra",L"de",L"desde",L"durante",
@@ -32,4 +33,24 @@ const std::unordered_set <std::wstring> filtro
 	
 	});
 
+const std::unordered_set <std::wstring> filtroTerminaciones
+({
+	L"ar",
+	L"ir",
+	L"er",
+	L"so",
+	L"to",
+	L"tó",
+	L"cho",
+	L"ado",
+	L"ando",
+	L"ados",
+	L"ción",
+	L"imos",
+	L"emos",
+	L"iendo"
+	
+	});
+
+// Terminaciones
 #endif 
