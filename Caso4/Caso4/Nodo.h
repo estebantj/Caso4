@@ -5,16 +5,9 @@
 class Nodo
 {
 public:
-	Nodo(std::wstring pPalabra)
-	{
-		this->palabra = pPalabra;
-	}
+	Nodo(std::wstring pPalabra);
 	
-
-	void nuevaArista(Nodo* nodoLlegada)
-	{
-
-	}
+	void nuevaArista(Nodo* nodoLlegada);
 
 private:
 	std::wstring palabra;
