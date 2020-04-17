@@ -3,7 +3,7 @@
 
 using namespace std;
 
-typedef std::unordered_map<std::wstring, Nodo*>MAP;
+typedef std::unordered_map<std::wstring, Nodo*> MAP;
 
 void Estructura::nuevaRelacion(wstring pPalabraSalida, wstring pPalabraLlegada)
 {
@@ -13,20 +13,21 @@ void Estructura::nuevaRelacion(wstring pPalabraSalida, wstring pPalabraLlegada)
 	Nodo* nodoSegundaPalabra = nullptr;
 	if (primeraPalabra == vertices.end())
 	{
+		//pair<MAP::iterator, bool> ret = vertices.insert({ pPalabraSalida, new Nodo(pPalabraSalida) });
 		nodoPrimeraPalabra = new Nodo(pPalabraSalida);
-		pair<MAP::iterator, bool> ret = vertices.insert({ pPalabraSalida, nodoPrimeraPalabra });
-		primeraPalabra = ret.first;
+		primeraPalabra = (vertices.insert({ pPalabraSalida, nodoPrimeraPalabra })).first;
 	}
 	else 
 		nodoPrimeraPalabra = primeraPalabra->second;
 	if (segundaPalabra == vertices.end())
 	{
+		//pair<MAP::iterator, bool> ret = vertices.insert({ pPalabraLlegada, new Nodo(pPalabraLlegada) });
 		nodoSegundaPalabra = new Nodo(pPalabraLlegada);
-		pair<MAP::iterator, bool> ret = vertices.insert({ pPalabraLlegada, nodoSegundaPalabra });
-		segundaPalabra = ret.first;
+		segundaPalabra = (vertices.insert({ pPalabraLlegada, nodoSegundaPalabra })).first;
 	}
 	else 
 		nodoSegundaPalabra = segundaPalabra->second;
-
-
+	
+	// Se añade la arista
+	nodoPrimeraPalabra->nuevaArista(nodoSegundaPalabra);
 }

@@ -9,13 +9,15 @@
 #include <io.h>    // for _setmode
 #include <fcntl.h> // for _O_U16TEXT
 #include "Variables.h"
+#include "Estructura.h"
 
 using namespace std;
 
+static Estructura estruc;
 
 void leerArchivo()
 {
-	wifstream archivo("Texto.txt");
+	wifstream archivo("pruebas.txt");
 	int cantidad = 0;
 	if (archivo.is_open()) {
 
@@ -23,11 +25,10 @@ void leerArchivo()
 		locale utf8_locale(locale(), new codecvt_utf8<wchar_t>); //TODO da error
 		(void)archivo.imbue(utf8_locale);
 
-		wstring word, parrafo;
+		wstring word, lastWord;
 		int numeroDeParrafo = 1;
-		wchar_t caracter, bom = L'\0';
+		wchar_t caracter;
 
-		archivo.get(bom);
 
 		while (archivo.get(caracter))
 		{
@@ -57,6 +58,15 @@ void leerArchivo()
 						{
 							wcout << word << "\n";  //Realmente acá iría el insertar en grafo usar numeroParrafo 
 							cantidad++;
+							if (!lastWord.empty())
+							{
+								estruc.nuevaRelacion(lastWord, word);
+								lastWord = word;
+							}
+							else
+							{
+								lastWord = word;
+							}
 						}
 						word.clear();
 					}
