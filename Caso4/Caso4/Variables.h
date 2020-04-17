@@ -26,27 +26,24 @@ const std::unordered_set <std::wstring> filtro
 	L"tuyos",L"tuyas",L"su",L"sus",L"suyo",L"suya",L"suyos",L"suyas",L"nuestro",L"nuestra",
 	L"nuestros",L"nuestras",L"vuestro",L"vuestra",L"vuestros",L"vuestras",L"yo",L"tú",L"él",
 	L"cerca",L"lejos",L"encima",L"fuera",L"bien",L"regular",L"despacio",L"así",L"mejor",L"peor",
-	L"usted",L"ustedes",L"nosotros",L"nosotras",L"vosotros",L"vosotras",L"ellos",L"ellas",L"me",
+	L"usted",L"ustedes",L"nosotros",L"nosotras",L"vosotros",L"vosotras",L"ellos",L"ellas", L"me",
 	L"te",L"nos",L"se",L"ya",L"aún",L"hoy",L"tarde",L"pronto",L"todavía",L"ayer",L"recién",L"nunca",
+	L"diferente",L"falso",L"fat	",L"débil",L"llano",L"estúpido",L"libre",L"lleno",L"generoso",L"bueno",
 	L"siempre",L"jamás",L"ahora",L"ahí",L"allí",L"aquí",L"acá",L"delante",L"detrás",L"arriba",L"abajo",
+	L"pobre",L"rápido",L"tranquilo",L"rico",L"derecha",L"correcto",L"áspero",L"seguro",L"serio",L"corto",
 	L"similar",L"muy",L"más",L"poco",L"bastante",L"menos",L"casi",L"talvez",L"acaso",L"quizás",L"tampoco",
-
+	L"estupendo",L"atractivo",L"feliz",L"saludable",L"hueco",L"enorme",L"hambriento",L"izquierda",L"ligero",
+	L"largo",L"ruidoso",L"bonito",L"tacaño",L"cerca",L"necesario",L"viejo",L"abierto",L"contrario",L"paralelo",
+	L"dormido",L"despierto",L"malo",L"precioso",L"agrio",L"brillante",L"barato",L"limpio",L"claro",L"cruel",L"profundo",
+	L"simple",L"fino",L"suave",L"sólido",L"especial",L"picante",L"pegajoso",L"directo",L"extraño",L"repentino",L"dulce",
 	L"aburrido",L"ácido",L"alegre",L"alto",L"amargo",L"ancho",L"atrevido",L"azul",L"bajo",L"blanco",L"blando",L"brando",
 	L"bonito",L"buen",L"bueno",L"caliente",L"capaz",L"central",L"chungo",L"mal",L"común",L"conocido",L"contento",L"corto",
 	L"débil",L"derecho",L"diferente",L"difícil",L"divertido",L"dulce",L"duro",L"enfermo",L"estrecho",L"exterior",L"fácil",
 	L"imposible",L"interesante",L"interior",L"inútil",L"izquierdo",L"joven",L"largo",L"lento",L"listo",L"masivo",L"mayor",
-	L"mejor",L"menor",L"mucho",L"muerto",L"musical",L"nacional",L"natural",L"negro",L"nuevo",L"peor",L"pequeño",L"perfecto",L"pobre",
-	L"pouco",L"popular",L"posible",L"primer",L"primero",L"principal",L"próximo",L"raro",L"real",L"recto",L"rico",L"rojo",
-	L"sano",L"seco",L"segundo",L"simple",L"sinvergüenza",L"social",L"solo",L"soso",L"tímido",L"tonto",L"triste",L"útil",L"jovén",
-	L"dormido",L"despierto",L"malo",L"precioso",L"agrio",L"brillante",L"barato",L"limpio",L"claro",L"cruel",L"profundo",
-	L"diferente",L"falso",L"fat	",L"débil",L"llano",L"estúpido",L"libre",L"lleno",L"generoso",L"bueno",
-	L"estupendo",L"atractivo",L"feliz",L"saludable",L"hueco",L"enorme",L"hambriento",L"izquierda",L"ligero",
-	L"largo",L"ruidoso",L"bonito",L"tacaño",L"cerca",L"necesario",L"viejo",L"abierto",L"contrario",L"paralelo",
-	L"pobre",L"rápido",L"tranquilo",L"rico",L"derecha",L"correcto",L"áspero",L"seguro",L"serio",L"corto",
-	L"simple",L"fino",L"suave",L"sólido",L"especial",L"picante",L"pegajoso",L"directo",L"extraño",L"repentino",L"dulce",
-	L"falso",L"famoso",L"feo",L"final",L"fresco",L"frío",L"fuerte",L"gordo",L"gran",L"grande",L"guapo",L"guay",L"húmedo",L"igual",L"igual",
-	
-	
+	L"mejor",L"menor",L"mucho",L"muerto",L"musical",L"nacional",L"natural",L"negro",L"nuevo",L"peor",L"pequeño",L"perfecto",
+	L"falso",L"famoso",L"feo",L"final",L"fresco",L"frío",L"fuerte",L"gordo",L"gran",L"grande",L"guapo",L"guay",L"húmedo",L"igual"
+	L"sano", L"seco",L"segundo",L"simple",L"sinvergüenza",L"social",L"solo",L"soso",L"tímido",L"tonto",L"triste",L"útil",L"jovén",
+	L"pobre",L"pouco",L"popular",L"posible",L"primer",L"primero",L"principal",L"próximo",L"raro",L"real",L"recto",L"rico",L"rojo",
 	});
 
 const std::unordered_set <std::wstring> filtroTerminaciones
