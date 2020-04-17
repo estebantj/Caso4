@@ -18,17 +18,16 @@ static Estructura estruc;
 void leerArchivo()
 {
 	wifstream archivo("pruebas.txt");
-	int cantidad = 0;
 	if (archivo.is_open()) {
 
 		// Dar formato utf-8
-		locale utf8_locale(locale(), new codecvt_utf8<wchar_t>); //TODO da error
+		locale utf8_locale(locale(), new codecvt_utf8<wchar_t>); 
 		(void)archivo.imbue(utf8_locale);
 
-		wstring word, lastWord;
-		int numeroDeParrafo = 1;
+		//Variables de vertices y cont de parrafo
 		wchar_t caracter;
-
+		int numeroDeParrafo = 1;
+		wstring word, lastWord;
 
 		while (archivo.get(caracter))
 		{
@@ -57,7 +56,6 @@ void leerArchivo()
 							filtroTerminaciones.find(subString4) == filtroTerminaciones.end())
 						{
 							wcout << word << "\n";  //Realmente acá iría el insertar en grafo usar numeroParrafo 
-							cantidad++;
 							if (!lastWord.empty())
 							{
 								estruc.nuevaRelacion(lastWord, word);
@@ -73,20 +71,18 @@ void leerArchivo()
 				}
 			}
 		}
-		wcout << L"cantidad: " << to_wstring(cantidad) << endl;
+		//wcout << L"cantidad: " << to_wstring(cantidad) << endl;
 
 	}
 	else
 	{
-		cout << "Error al abrir archivo\n";
+		wcout << "Error al abrir archivo\n";   //Debe ser wcout porque la consola esta en ese modo
 	}
 }
 
 int main()
 {
-	int m = _setmode(_fileno(stdout), _O_U16TEXT); // Se cambia la consola a utf-16
-
+	int m = _setmode(_fileno(stdout), _O_U16TEXT); // Se cambia la consola a utf-16 se le asigna a "m" para eliminar el warning 
 	leerArchivo();
-	//system("PAUSE");
 	return 1;
 }
