@@ -3,18 +3,18 @@
 
 using namespace std;
 
-typedef std::unordered_map<std::wstring, Nodo*> MAP;
+typedef std::unordered_map<std::wstring, Vertice*> MAP;
 
 void Estructura::nuevaRelacion(wstring pPalabraSalida, wstring pPalabraLlegada)
 {
 	MAP::iterator primeraPalabra = vertices.find(pPalabraSalida);
 	MAP::iterator segundaPalabra = vertices.find(pPalabraLlegada);
-	Nodo* nodoPrimeraPalabra = nullptr;
-	Nodo* nodoSegundaPalabra = nullptr;
+	Vertice* nodoPrimeraPalabra = nullptr;
+	Vertice* nodoSegundaPalabra = nullptr;
 	if (primeraPalabra == vertices.end())
 	{
 		//pair<MAP::iterator, bool> ret = vertices.insert({ pPalabraSalida, new Nodo(pPalabraSalida) });
-		nodoPrimeraPalabra = new Nodo(pPalabraSalida);
+		nodoPrimeraPalabra = new Vertice(pPalabraSalida);
 		primeraPalabra = (vertices.insert({ pPalabraSalida, nodoPrimeraPalabra })).first;
 	}
 	else 
@@ -22,7 +22,7 @@ void Estructura::nuevaRelacion(wstring pPalabraSalida, wstring pPalabraLlegada)
 	if (segundaPalabra == vertices.end())
 	{
 		//pair<MAP::iterator, bool> ret = vertices.insert({ pPalabraLlegada, new Nodo(pPalabraLlegada) });
-		nodoSegundaPalabra = new Nodo(pPalabraLlegada);
+		nodoSegundaPalabra = new Vertice(pPalabraLlegada);
 		segundaPalabra = (vertices.insert({ pPalabraLlegada, nodoSegundaPalabra })).first;
 	}
 	else 
