@@ -38,7 +38,7 @@ void leerArchivo()
 
 				else // else if (caracter == " " || caracter == "\n")
 				{
-					if (caracter == '\n') numeroDeParrafo++;
+					if (caracter == '\n') lastWord.clear();;
 
 					if (!word.empty())
 					{
