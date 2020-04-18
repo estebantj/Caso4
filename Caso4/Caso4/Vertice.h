@@ -13,11 +13,9 @@ public:
 
 private:
 
-	aristaDataType* searchArista(std::wstring pPalabra);
 
 	std::wstring palabra;
 	int peso;
-	//std::vector< aristaDataType > aristas; // Linked list
 	DoubleCircularList aristas;
 
 	friend class DoubleCircularList;

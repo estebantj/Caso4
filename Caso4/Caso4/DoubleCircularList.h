@@ -2,8 +2,6 @@
 #include "Vertice.h"
 #include <unordered_map>
 
-typedef std::pair<Vertice*, int> aristaDataType;
-
 class NodoArista
 {
 public:
