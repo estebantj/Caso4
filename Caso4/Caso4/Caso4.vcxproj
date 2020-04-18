@@ -145,7 +145,6 @@
     <ClCompile Include="Vertice.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DoubleCircularList.h" />
     <ClInclude Include="Estructura.h" />
     <ClInclude Include="Vertice.h" />
     <ClInclude Include="Variables.h" />

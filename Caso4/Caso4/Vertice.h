@@ -2,7 +2,38 @@
 #include <string>
 #include <vector>
 #include <utility>
-#include "DoubleCircularList.h"
+#include <unordered_map>	
+
+class Vertice;
+
+
+class NodoArista
+{
+public:
+	NodoArista(Vertice* llegada);
+
+	void moverNodo();
+
+	NodoArista* siguiente;
+	NodoArista* anterior;
+
+	Vertice* arista;
+	int peso;
+
+};
+
+class DoubleCircularList
+{
+public:
+	void insertarNodo(Vertice* nodoLlegada);
+
+	NodoArista* buscarNodo(std::wstring pPalabra);
+
+private:
+	NodoArista* primero;
+	std::unordered_map<std::wstring, NodoArista*> mapaAristasExistentes;
+};
+
 
 class Vertice
 {
@@ -16,8 +47,10 @@ private:
 
 	std::wstring palabra;
 	int peso;
+	friend class DoubleCircularList;
+
 	DoubleCircularList aristas;
 
-	friend class DoubleCircularList;
+
 };
 

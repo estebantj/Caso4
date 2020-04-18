@@ -71,8 +71,6 @@ void leerArchivo()
 				}
 			}
 		}
-		//wcout << L"cantidad: " << to_wstring(cantidad) << endl;
-
 	}
 	else
 	{
@@ -84,5 +82,5 @@ int main()
 {
 	int m = _setmode(_fileno(stdout), _O_U16TEXT); // Se cambia la consola a utf-16 se le asigna a "m" para eliminar el warning 
 	leerArchivo();
-	return 1;
+	return 20;
 }
