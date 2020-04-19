@@ -1,4 +1,4 @@
-#include "DoubleCircularList.h"
+#include "Vertice.h"
 
 NodoArista::NodoArista(Vertice* llegada)
 {
@@ -6,6 +6,11 @@ NodoArista::NodoArista(Vertice* llegada)
 	this->anterior = nullptr;
 	this->siguiente = nullptr;
 	this->peso = 1;
+}
+
+void NodoArista::moverNodo()
+{
+
 }
 
 void DoubleCircularList::insertarNodo(Vertice* nodoLlegada)

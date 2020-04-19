@@ -13,7 +13,7 @@
 
 using namespace std;
 
-static Estructura estruc;
+static Estructura estructura;
 
 void leerArchivo()
 {
@@ -38,7 +38,7 @@ void leerArchivo()
 
 				else // else if (caracter == " " || caracter == "\n")
 				{
-					if (caracter == '\n') lastWord.clear();;
+					if (caracter == '\n') lastWord.clear();
 
 					if (!word.empty())
 					{
@@ -55,10 +55,10 @@ void leerArchivo()
 							filtroTerminaciones.find(subString3) == filtroTerminaciones.end() &&
 							filtroTerminaciones.find(subString4) == filtroTerminaciones.end())
 						{
-							wcout << word << "\n";  //Realmente acá iría el insertar en grafo usar numeroParrafo 
+							wcout << word << "\n";  
 							if (!lastWord.empty())
 							{
-								estruc.nuevaRelacion(lastWord, word);
+								estructura.nuevaRelacion(lastWord, word);
 								lastWord = word;
 							}
 							else
@@ -71,8 +71,6 @@ void leerArchivo()
 				}
 			}
 		}
-		//wcout << L"cantidad: " << to_wstring(cantidad) << endl;
-
 	}
 	else
 	{
@@ -84,5 +82,5 @@ int main()
 {
 	int m = _setmode(_fileno(stdout), _O_U16TEXT); // Se cambia la consola a utf-16 se le asigna a "m" para eliminar el warning 
 	leerArchivo();
-	return 1;
+	return 20;
 }
