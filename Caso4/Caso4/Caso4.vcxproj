@@ -139,7 +139,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DoubleCircularList.cpp" />
     <ClCompile Include="Estructura.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Vertice.cpp" />

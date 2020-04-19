@@ -32,3 +32,11 @@ void Estructura::nuevaRelacion(wstring pPalabraSalida, wstring pPalabraLlegada)
 	// Se añade la arista
 	nodoPrimeraPalabra->nuevaArista(nodoSegundaPalabra);
 }
+
+void Estructura::imprimirRelaciones()
+{
+	for (auto& it : vertices) {
+		wcout << L"########### Relaciones de " << it.second->palabra << " ######################\n";
+		it.second->aristas.imprimirNodos(it.second->palabra);
+	}
+}

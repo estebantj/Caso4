@@ -2,7 +2,8 @@
 #include <string>
 #include <vector>
 #include <utility>
-#include <unordered_map>	
+#include <unordered_map>
+#include <iostream>
 
 class Vertice;
 
@@ -11,8 +12,6 @@ class NodoArista
 {
 public:
 	NodoArista(Vertice* llegada);
-
-	void moverNodo();
 
 	NodoArista* siguiente;
 	NodoArista* anterior;
@@ -27,6 +26,8 @@ class DoubleCircularList
 public:
 	void insertarNodo(Vertice* nodoLlegada);
 	NodoArista* buscarNodo(std::wstring pPalabra);
+	void moverNodo(NodoArista* pNodo);
+	void imprimirNodos(std::wstring pPalabra);
 
 private:
 	NodoArista* primero;
@@ -45,6 +46,8 @@ private:
 	int poder;
 	std::wstring palabra;
 	DoubleCircularList aristas;
+
 	friend class DoubleCircularList;
+	friend class Estructura;
 };
 

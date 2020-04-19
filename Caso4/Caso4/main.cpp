@@ -17,7 +17,7 @@ static Estructura estructura;
 
 void leerArchivo()
 {
-	wifstream archivo("pruebas.txt");
+	wifstream archivo("Texto.txt");
 	if (archivo.is_open()) {
 
 		// Dar formato utf-8
@@ -55,7 +55,7 @@ void leerArchivo()
 							filtroTerminaciones.find(subString3) == filtroTerminaciones.end() &&
 							filtroTerminaciones.find(subString4) == filtroTerminaciones.end())
 						{
-							wcout << word << "\n";  
+							//wcout << word << "\n";  
 							if (!lastWord.empty())
 							{
 								estructura.nuevaRelacion(lastWord, word);
@@ -82,5 +82,6 @@ int main()
 {
 	int m = _setmode(_fileno(stdout), _O_U16TEXT); // Se cambia la consola a utf-16 se le asigna a "m" para eliminar el warning 
 	leerArchivo();
+	estructura.imprimirRelaciones();
 	return 20;
 }
