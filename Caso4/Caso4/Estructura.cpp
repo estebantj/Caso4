@@ -19,6 +19,7 @@ void Estructura::nuevaRelacion(wstring pPalabraSalida, wstring pPalabraLlegada)
 	}
 	else 
 		nodoPrimeraPalabra = primeraPalabra->second;
+
 	if (segundaPalabra == vertices.end())
 	{
 		//pair<MAP::iterator, bool> ret = vertices.insert({ pPalabraLlegada, new Nodo(pPalabraLlegada) });

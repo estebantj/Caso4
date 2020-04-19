@@ -7,7 +7,6 @@ Vertice::Vertice(std::wstring pPalabra)
 
 void Vertice::nuevaArista(Vertice* nodoLlegada)
 {
-	//aristaDataType* arista = searchArista(nodoLlegada->palabra);
 	NodoArista* arista = aristas.buscarNodo(nodoLlegada->palabra);
 	if (arista == nullptr)
 	{

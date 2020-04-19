@@ -26,7 +26,6 @@ class DoubleCircularList
 {
 public:
 	void insertarNodo(Vertice* nodoLlegada);
-
 	NodoArista* buscarNodo(std::wstring pPalabra);
 
 private:
@@ -39,18 +38,13 @@ class Vertice
 {
 public:
 	Vertice(std::wstring pPalabra);
-	
 	void nuevaArista(Vertice* nodoLlegada);
 
 private:
 
-
+	int poder;
 	std::wstring palabra;
-	int peso;
-	friend class DoubleCircularList;
-
 	DoubleCircularList aristas;
-
-
+	friend class DoubleCircularList;
 };
 
