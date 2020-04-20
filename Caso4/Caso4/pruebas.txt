@@ -1,1 +1,1 @@
-casa hola casa hola 
+casa -> hola -> casa -> hola -> casa -> perro -> casa -> hola -> casa -> perro -> casa -> baño ->
