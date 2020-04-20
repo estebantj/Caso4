@@ -82,6 +82,7 @@ int main()
 {
 	int m = _setmode(_fileno(stdout), _O_U16TEXT); // Se cambia la consola a utf-16 se le asigna a "m" para eliminar el warning 
 	leerArchivo();
-	estructura.imprimirRelaciones();
+	//estructura.imprimirRelaciones();
+	estructura.listarPoder();
 	return 20;
 }
