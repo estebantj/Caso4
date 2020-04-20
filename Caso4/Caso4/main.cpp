@@ -17,7 +17,7 @@ static Estructura estructura;
 
 void leerArchivo()
 {
-	wifstream archivo("Texto.txt");
+	wifstream archivo("pruebas.txt");
 	if (archivo.is_open()) {
 
 		// Dar formato utf-8
