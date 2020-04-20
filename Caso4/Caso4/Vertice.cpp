@@ -85,11 +85,10 @@ void DoubleCircularList::imprimirNodos(std::wstring pPalabra)
 		NodoArista* aux = primero;
 		do {
 			Vertice* verticeLlegada = aux->arista; // Vertice del nodo de llegada
-			std::wstring palabra = verticeLlegada->palabra;
 			NodoArista* nodoAristaActual = verticeLlegada->aristas.buscarNodo(pPalabra); // Se busca si existe una relacion de vuelta
 			int pesoIda = aux->peso;
 			int pesoDeVuelta = (nodoAristaActual != nullptr ? nodoAristaActual->peso : 0);
-			std::wcout << palabra;
+			std::wcout << verticeLlegada->palabra;
 			if (pesoIda > 1)
 			{
 				std::wcout << " --- Peso hacia: " << pesoIda;

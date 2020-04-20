@@ -24,10 +24,10 @@ public:
 class DoubleCircularList
 {
 public:
-	void insertarNodo(Vertice* nodoLlegada);
-	NodoArista* buscarNodo(std::wstring pPalabra);
 	void moverNodo(NodoArista* pNodo);
+	void insertarNodo(Vertice* nodoLlegada);
 	void imprimirNodos(std::wstring pPalabra);
+	NodoArista* buscarNodo(std::wstring pPalabra);
 
 private:
 	NodoArista* primero;
