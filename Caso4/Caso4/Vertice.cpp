@@ -5,78 +5,48 @@ Vertice::Vertice(std::wstring pPalabra)
 	this->palabra = pPalabra;
 }
 
-void Vertice::nuevaArista(Vertice* nodoLlegada)
+Arista* Vertice::buscarArista(std::wstring pPalabra)
 {
-	NodoArista* arista = aristas.buscarNodo(nodoLlegada->palabra);
-	if (arista == nullptr)
+	mapType::iterator arista = mapaAristasExistentes.find(pPalabra);
+	if (arista != mapaAristasExistentes.end())
 	{
-		aristas.insertarNodo(nodoLlegada);
-	}
-	else 
-	{
-		arista->peso = arista->peso + 1;
-		aristas.moverNodo(arista);
-	}	
-}
-
-NodoArista::NodoArista(Vertice* llegada)
-{
-	this->arista = llegada;
-	this->anterior = nullptr;
-	this->siguiente = nullptr;
-	this->peso = 1;
-}
-
-void DoubleCircularList::moverNodo(NodoArista* pNodo)
-{
-	/*
-	while (pNodo->peso > pNodo->siguiente->peso && pNodo->siguiente != primero);
-	{
-		NodoArista* anterior = pNodo->anterior;
-		NodoArista* siguiente = pNodo->siguiente;
-
-		anterior->siguiente = siguiente;
-		siguiente->anterior = anterior;
-		pNodo->anterior = siguiente;
-		pNodo->siguiente = siguiente->siguiente;
-		siguiente->siguiente->anterior = pNodo;
-		
-		if (primero == pNodo) {
-			primero = pNodo->anterior;
-		}
-	}
-	*/
-}
-
-void DoubleCircularList::insertarNodo(Vertice* nodoLlegada)
-{
-	NodoArista* nuevoNodo = new NodoArista(nodoLlegada);
-	if (primero != nullptr)
-	{
-		NodoArista* last = primero->anterior;
-		nuevoNodo->siguiente = primero;
-		nuevoNodo->anterior = last;
-		last->siguiente = primero->anterior = nuevoNodo;
-		primero = nuevoNodo;
-	}
-	else
-	{
-		primero = nuevoNodo;
-		primero->anterior = primero->siguiente = primero;
-	}
-	mapaAristasExistentes.insert({ nodoLlegada->palabra, nuevoNodo });
-}
-
-NodoArista* DoubleCircularList::buscarNodo(std::wstring pPalabra)
-{
-	auto nodoBuscado = mapaAristasExistentes.find(pPalabra);
-	if (nodoBuscado != mapaAristasExistentes.end())
-	{
-		return nodoBuscado->second;
+		return arista->second;
 	}
 	return nullptr;
 }
 
+void Vertice::nuevaArista(Vertice* nodoLlegada)
+{
+	auto aristaPair = mapaAristasExistentes.find(nodoLlegada->palabra);
+	if (aristaPair == mapaAristasExistentes.end())
+	{
+		Arista* arista;
+		arista->verticeLlegada = nodoLlegada;
+		arista->peso = 0;
+		aristas.push_back(arista);
+		mapaAristasExistentes.insert({ nodoLlegada->palabra, arista });
+	}
+	else
+	{
+		Arista* arist = aristaPair->second;
+		arist->peso = arist->peso + 1;
+	}
+}
+
+void Vertice::imprimirAristas()
+{
+	for (auto it : aristas) 
+	{
+		int pesoIda = it->second;
+		if (pesoIda >= 1)
+		{
+			std::wcout << " --- Peso hacia: " << pesoIda;
+		}
+	}
+}
+
+
+/*
 // El parametro es la palabra del nodo al que se le van a imprimir sus relaciones
 void DoubleCircularList::imprimirNodos(std::wstring pPalabra)
 {
@@ -102,3 +72,4 @@ void DoubleCircularList::imprimirNodos(std::wstring pPalabra)
 		} while (aux != primero);
 	}
 }
+*/

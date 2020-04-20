@@ -31,7 +31,7 @@ void Estructura::nuevaRelacion(std::wstring pPalabraSalida, std::wstring pPalabr
 	else 
 		nodoSegundaPalabra = segundaPalabra->second;
 	
-	// Se añade la arista
+	// Se aÃ±ade la arista
 	nodoPrimeraPalabra->nuevaArista(nodoSegundaPalabra);
 	nodoPrimeraPalabra->poder++;
 }
@@ -39,8 +39,8 @@ void Estructura::nuevaRelacion(std::wstring pPalabraSalida, std::wstring pPalabr
 void Estructura::imprimirRelaciones()
 {
 	for (auto& it : vertices) {
-		std::wcout << L"########### Relaciones de " << it.first << " ###########\n";
-		it.second->aristas.imprimirNodos(it.first);
+		wcout << L"########### Relaciones de " << it.second->palabra << " ######################\n";
+		it.second->imprimirAristas();
 	}
 }
 
