@@ -10,6 +10,7 @@ public:
 	
 	void listarPoder();
 	void imprimirRelaciones();
+	void ordernarAristas();
 	void nuevaRelacion(std::wstring pPalabraSalida, std::wstring pPalabraLlegada);
 
 	std::unordered_map<std::wstring, Vertice*> vertices;

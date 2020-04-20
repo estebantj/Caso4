@@ -4,34 +4,41 @@
 #include <utility>
 #include <unordered_map>
 #include <iostream>
+#include <algorithm>
 
 class Vertice;
 class Arista;
 
 typedef std::unordered_map<std::wstring, Arista*> mapType;
 
-struct Arista
+class Arista
 {
-	Vertice* verticeLlegada;
+public:
+	Arista(Vertice* pLlegada)
+	{
+		this->peso = 1;
+		this->verticeLlegada = pLlegada;
+	}
 	int peso;
+	Vertice* verticeLlegada;
 };
 
 class Vertice
 {
 public:
 	Vertice(std::wstring pPalabra);
-	Arista* buscarArista(std::wstring pPalabra);
-	void nuevaArista(Vertice* nodoLlegada);
+
+	void ordenarAristas();
 	void imprimirAristas();
+	void nuevaArista(Vertice* nodoLlegada);
+	Arista* buscarArista(std::wstring pPalabra);
 
 private:
-
 	int poder;
 	std::wstring palabra;
 	std::vector<Arista*> aristas;
 	std::unordered_map<std::wstring, Arista*> mapaAristasExistentes;
 
-	friend class DoubleCircularList;
 	friend class Estructura;
 };
 

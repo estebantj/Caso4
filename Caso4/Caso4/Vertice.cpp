@@ -17,59 +17,49 @@ Arista* Vertice::buscarArista(std::wstring pPalabra)
 
 void Vertice::nuevaArista(Vertice* nodoLlegada)
 {
-	auto aristaPair = mapaAristasExistentes.find(nodoLlegada->palabra);
+	mapType::iterator aristaPair = mapaAristasExistentes.find(nodoLlegada->palabra);
 	if (aristaPair == mapaAristasExistentes.end())
 	{
-		Arista* arista;
-		arista->verticeLlegada = nodoLlegada;
-		arista->peso = 0;
+		Arista* arista = new Arista(nodoLlegada);
 		aristas.push_back(arista);
 		mapaAristasExistentes.insert({ nodoLlegada->palabra, arista });
 	}
 	else
 	{
-		Arista* arist = aristaPair->second;
-		arist->peso = arist->peso + 1;
+		Arista* arista = aristaPair->second;
+		arista->peso = arista->peso + 1;
+		this->poder = this->poder + 1;
 	}
+}
+
+void Vertice::ordenarAristas()
+{
+	std::sort(aristas.begin(), aristas.end(), [](const Arista* lhs, const Arista* rhs)
+		{
+			return lhs->peso < rhs->peso;
+		});
 }
 
 void Vertice::imprimirAristas()
 {
 	for (auto it : aristas) 
 	{
-		int pesoIda = it->second;
-		if (pesoIda >= 1)
+		
+		Arista* aristaDeVuelta = it->verticeLlegada->buscarArista(this->palabra);
+		int pesoIda = it->peso;
+		int pesoDeVuelta = (aristaDeVuelta != nullptr) ? aristaDeVuelta->peso : 0;
+
+		if (pesoIda > 1 || pesoDeVuelta > 1)
+			std::wcout << it->verticeLlegada->palabra;
+
+		if (pesoIda > 1)
 		{
-			std::wcout << " --- Peso hacia: " << pesoIda;
+			std::wcout << " --- Peso hacia: " << pesoIda;			
 		}
-	}
+		if (pesoDeVuelta > 1)
+		{
+			std::wcout << " --- Peso de vuelta: " << pesoDeVuelta;
+		}
+		std::wcout << "\n";
+	}	
 }
-
-
-/*
-// El parametro es la palabra del nodo al que se le van a imprimir sus relaciones
-void DoubleCircularList::imprimirNodos(std::wstring pPalabra)
-{
-	if (primero != nullptr)
-	{
-		NodoArista* aux = primero;
-		do {
-			Vertice* verticeLlegada = aux->arista; // Vertice del nodo de llegada
-			NodoArista* nodoAristaActual = verticeLlegada->aristas.buscarNodo(pPalabra); // Se busca si existe una relacion de vuelta
-			int pesoIda = aux->peso;
-			int pesoDeVuelta = (nodoAristaActual != nullptr ? nodoAristaActual->peso : 0);
-			std::wcout << verticeLlegada->palabra;
-			if (pesoIda > 1)
-			{
-				std::wcout << " --- Peso hacia: " << pesoIda;
-			}
-			if (pesoDeVuelta > 1)
-			{
-				std::wcout << " --- Peso de vuelta: " << pesoDeVuelta;
-			}
-			std::wcout << "\n";
-			aux = aux->siguiente;
-		} while (aux != primero);
-	}
-}
-*/

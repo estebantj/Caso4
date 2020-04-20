@@ -17,7 +17,7 @@ static Estructura estructura;
 
 void leerArchivo()
 {
-	wifstream archivo("pruebas.txt");
+	wifstream archivo("Texto.txt");
 	if (archivo.is_open()) {
 
 		// Dar formato utf-8
@@ -82,7 +82,8 @@ int main()
 {
 	int m = _setmode(_fileno(stdout), _O_U16TEXT); // Se cambia la consola a utf-16 se le asigna a "m" para eliminar el warning 
 	leerArchivo();
-	//estructura.imprimirRelaciones();
-	estructura.listarPoder();
+	estructura.ordernarAristas();
+	estructura.imprimirRelaciones();
+	//estructura.listarPoder();
 	return 20;
 }
