@@ -39,6 +39,6 @@ private:
 	std::vector<Arista*> aristas;
 	std::unordered_map<std::wstring, Arista*> mapaAristasExistentes;
 
-	friend class Estructura;
+	friend class Grafo;
 };
 

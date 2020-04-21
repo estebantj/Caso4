@@ -4,13 +4,14 @@
 #include <algorithm>    
 #include "Vertice.h"
 
-class Estructura
+class Grafo
 {
 public:
 	
 	void listarPoder();
+	void ordenarAristas();
+	void ordenarVertices();
 	void imprimirRelaciones();
-	void ordernarAristas();
 	void nuevaRelacion(std::wstring pPalabraSalida, std::wstring pPalabraLlegada);
 
 	std::unordered_map<std::wstring, Vertice*> vertices;

@@ -9,11 +9,11 @@
 #include <io.h>    // for _setmode
 #include <fcntl.h> // for _O_U16TEXT
 #include "Variables.h"
-#include "Estructura.h"
+#include "Grafo.h"
 
 using namespace std;
 
-static Estructura estructura;
+static Grafo estructura;
 
 void leerArchivo()
 {
@@ -68,28 +68,6 @@ void leerArchivo()
 							}
 							if (!lastWords[arraySize - 1].empty()) estructura.nuevaRelacion(lastWords[arraySize - 1], word);
 							lastWords[arraySize - 1] = word;
-							/*
-							if (!lastWord1.empty())
-							{
-								estructura.nuevaRelacion(lastWord1, word);
-							}
-							if (!lastWord2.empty())
-							{
-								estructura.nuevaRelacion(lastWord2, word);
-							}
-							if (!lastWord3.empty())
-							{
-								estructura.nuevaRelacion(lastWord3, word);
-							}
-							if (!lastWord4.empty())
-							{
-								estructura.nuevaRelacion(lastWord4, word);
-							}
-							lastWord1 = lastWord2;
-							lastWord2 = lastWord3;
-							lastWord3 = lastWord4;
-							lastWord4 = word;
-							*/
 						}
 						word.clear();
 					}
@@ -107,8 +85,9 @@ int main()
 {
 	int m = _setmode(_fileno(stdout), _O_U16TEXT); // Se cambia la consola a utf-16 se le asigna a "m" para eliminar el warning 
 	leerArchivo();
-	estructura.ordernarAristas();
+	estructura.ordenarAristas();
 	estructura.imprimirRelaciones();
 	//estructura.listarPoder();
+	estructura.ordenarVertices();
 	return 20;
 }
