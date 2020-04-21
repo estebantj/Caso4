@@ -48,18 +48,18 @@ void Vertice::imprimirAristas()
 		Arista* aristaDeVuelta = it->verticeLlegada->buscarArista(this->palabra);
 		int pesoIda = it->peso;
 		int pesoDeVuelta = (aristaDeVuelta != nullptr) ? aristaDeVuelta->peso : 0;
-
-		if (pesoIda > 1 || pesoDeVuelta > 1)
-			std::wcout << it->verticeLlegada->palabra;
-
+		
 		if (pesoIda > 1)
 		{
-			std::wcout << " --- Peso hacia: " << pesoIda;			
+			std::wcout << it->verticeLlegada->palabra << " --- Peso ida: " << pesoIda << "\n";
 		}
+
+		/*
 		if (pesoDeVuelta > 1)
 		{
 			std::wcout << " --- Peso de vuelta: " << pesoDeVuelta;
 		}
-		std::wcout << "\n";
-	}	
+		*/
+	}
+	std::wcout << std::endl;
 }

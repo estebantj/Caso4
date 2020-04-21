@@ -27,7 +27,7 @@ void leerArchivo()
 		//Variables de vertices y cont de parrafo
 		wchar_t caracter;
 		int numeroDeParrafo = 1;
-		wstring word, lastWord;
+		wstring word, lastWord, lastLastWord;
 
 		while (archivo.get(caracter))
 		{
@@ -38,8 +38,11 @@ void leerArchivo()
 
 				else // else if (caracter == " " || caracter == "\n")
 				{
-					if (caracter == '\n') lastWord.clear();
-
+					if (caracter == '\n') 
+					{
+						lastWord.clear();
+						lastLastWord.clear();
+					}
 					if (!word.empty())
 					{
 						size_t wordSize = word.length();
@@ -55,16 +58,17 @@ void leerArchivo()
 							filtroTerminaciones.find(subString3) == filtroTerminaciones.end() &&
 							filtroTerminaciones.find(subString4) == filtroTerminaciones.end())
 						{
-							//wcout << word << "\n";  
+							//wcout << word << "\n";
+							if (!lastLastWord.empty())
+							{
+								estructura.nuevaRelacion(lastLastWord, word);
+							}
 							if (!lastWord.empty())
 							{
 								estructura.nuevaRelacion(lastWord, word);
-								lastWord = word;
 							}
-							else
-							{
-								lastWord = word;
-							}
+							lastLastWord = lastWord;
+							lastWord = word;
 						}
 						word.clear();
 					}
