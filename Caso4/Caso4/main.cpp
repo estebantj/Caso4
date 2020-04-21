@@ -27,7 +27,8 @@ void leerArchivo()
 		//Variables de vertices y cont de parrafo
 		wchar_t caracter;
 		int numeroDeParrafo = 1;
-		wstring word, lastWord, lastLastWord;
+		wstring word, lastWord1, lastWord2, lastWord3, lastWord4;
+		wstring lastWords[10];
 
 		while (archivo.get(caracter))
 		{
@@ -40,8 +41,8 @@ void leerArchivo()
 				{
 					if (caracter == '\n') 
 					{
-						lastWord.clear();
-						lastLastWord.clear();
+						lastWord1.clear();
+						lastWord2.clear();
 					}
 					if (!word.empty())
 					{
@@ -59,16 +60,36 @@ void leerArchivo()
 							filtroTerminaciones.find(subString4) == filtroTerminaciones.end())
 						{
 							//wcout << word << "\n";
-							if (!lastLastWord.empty())
+							int arraySize = size(lastWords);
+							for (int i=0; i < arraySize-1; i++ )
 							{
-								estructura.nuevaRelacion(lastLastWord, word);
+								if (!lastWords[i].empty()) estructura.nuevaRelacion(lastWords[i], word);
+								lastWords[i] = lastWords[i+1];
 							}
-							if (!lastWord.empty())
+							if (!lastWords[arraySize - 1].empty()) estructura.nuevaRelacion(lastWords[arraySize - 1], word);
+							lastWords[arraySize - 1] = word;
+							/*
+							if (!lastWord1.empty())
 							{
-								estructura.nuevaRelacion(lastWord, word);
+								estructura.nuevaRelacion(lastWord1, word);
 							}
-							lastLastWord = lastWord;
-							lastWord = word;
+							if (!lastWord2.empty())
+							{
+								estructura.nuevaRelacion(lastWord2, word);
+							}
+							if (!lastWord3.empty())
+							{
+								estructura.nuevaRelacion(lastWord3, word);
+							}
+							if (!lastWord4.empty())
+							{
+								estructura.nuevaRelacion(lastWord4, word);
+							}
+							lastWord1 = lastWord2;
+							lastWord2 = lastWord3;
+							lastWord3 = lastWord4;
+							lastWord4 = word;
+							*/
 						}
 						word.clear();
 					}
