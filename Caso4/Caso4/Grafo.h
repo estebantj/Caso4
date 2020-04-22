@@ -12,6 +12,7 @@ public:
 	void ordenarVertices();
 	void imprimirRelaciones();
 	void palabrasMasPoderosas(int cantidad);
+	void palabrasMenosPoderosas(std::wstring pPalabra);
 	void nuevaRelacion(std::wstring pPalabraSalida, std::wstring pPalabraLlegada);
 
 	std::vector<Vertice*> verticesOrdenados;

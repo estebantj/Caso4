@@ -51,13 +51,6 @@ void Grafo::imprimirRelaciones()
 	}
 }
 
-void Grafo::palabrasMasPoderosas(int cantidad)
-{
-	std::wcout<< L"\nLas "+std::to_wstring(cantidad)+L" palabras con mayor poder son las siguientes: \n";
-
-	for (int i = 0; i < cantidad;i++)    std::wcout << verticesOrdenados.at(i)->palabra + L": con un poder de " + std::to_wstring(verticesOrdenados.at(i)->poder) + L"\n";
-}
-
 void Grafo::ordenarAristas()
 {
 	for (auto& it : vertices)
@@ -67,7 +60,6 @@ void Grafo::ordenarAristas()
 }
 
 
-//Resuelve pregunta A)
 void Grafo::ordenarVertices()
 {
 
@@ -83,3 +75,24 @@ void Grafo::ordenarVertices()
 	for (auto x : verticesOrdenados) std::wcout << std::to_wstring(x->poder) + L"   " + x->palabra + L"\n";
 }
 
+//Resuelve pregunta A)
+void Grafo::palabrasMasPoderosas(int cantidad)
+{
+	std::wcout<< L"\nLas "+std::to_wstring(cantidad)+L" palabras con mayor poder son las siguientes: \n";
+
+	for (int i = 0; i < cantidad;i++) std::wcout << verticesOrdenados.at(i)->palabra +L": con un poder de " + std::to_wstring(verticesOrdenados.at(i)->poder) + L"\n";
+}
+
+void Grafo::palabrasMenosPoderosas(std::wstring pPalabra) {
+	std::unordered_map<std::wstring,Vertice*>::iterator it = vertices.find(pPalabra);
+	if (it == vertices.end()) {
+		std::wcout << L"La palabra no existe en el Grafo";
+		return;
+	}
+		
+	for (int repe = 0;repe < it->second->cantMenorPoder;repe++) {
+			//Tener un numero de posicion de la lista de aristas donde solo tenemos
+			//que movernos esas veces porque el resto son mayores tons al ordenarla 
+			//
+	}
+}
