@@ -11,24 +11,22 @@
 #include "Variables.h"
 #include "Grafo.h"
 
-using namespace std;
 
 static Grafo estructura;
 
 void leerArchivo()
 {
-	wifstream archivo("Texto.txt");
+	std::wifstream archivo("Texto.txt");
 	if (archivo.is_open()) {
 
 		// Dar formato utf-8
-		locale utf8_locale(locale(), new codecvt_utf8<wchar_t>); 
+		std::locale utf8_locale(std::locale(), new std::codecvt_utf8<wchar_t>);
 		(void)archivo.imbue(utf8_locale);
 
-		//Variables de vertices y cont de parrafo
+		//Variables de vertices 
 		wchar_t caracter;
-		int numeroDeParrafo = 1;
-		wstring word, lastWord1, lastWord2, lastWord3, lastWord4;
-		wstring lastWords[10];
+		std::wstring word;
+		std::wstring lastWords[2000];
 
 		while (archivo.get(caracter))
 		{
@@ -41,17 +39,16 @@ void leerArchivo()
 				{
 					if (caracter == '\n') 
 					{
-						lastWord1.clear();
-						lastWord2.clear();
+						//TODO: Needs to be checked
 					}
 					if (!word.empty())
 					{
 						size_t wordSize = word.length();
 						// Terminaciones
-						wstring subString1 = wordSize > 1 ? word.substr(wordSize - 2, wordSize - 1) : L"";
-						wstring subString2 = wordSize > 2 ? word.substr(wordSize - 3, wordSize - 1) : L"";
-						wstring subString3 = wordSize > 3 ? word.substr(wordSize - 4, wordSize - 1) : L"";
-						wstring subString4 = wordSize > 4 ? word.substr(wordSize - 5, wordSize - 1) : L"";
+						std::wstring subString1 = wordSize > 1 ? word.substr(wordSize - 2, wordSize - 1) : L"";
+						std::wstring subString2 = wordSize > 2 ? word.substr(wordSize - 3, wordSize - 1) : L"";
+						std::wstring subString3 = wordSize > 3 ? word.substr(wordSize - 4, wordSize - 1) : L"";
+						std::wstring subString4 = wordSize > 4 ? word.substr(wordSize - 5, wordSize - 1) : L"";
 
 						if ((filtro.find(word) == filtro.end()) &&
 							filtroTerminaciones.find(subString1) == filtroTerminaciones.end() &&
@@ -60,7 +57,7 @@ void leerArchivo()
 							filtroTerminaciones.find(subString4) == filtroTerminaciones.end())
 						{
 							//wcout << word << "\n";
-							int arraySize = size(lastWords);
+							int arraySize = std::size(lastWords);
 							for (int i=0; i < arraySize-1; i++ )
 							{
 								if (!lastWords[i].empty()) estructura.nuevaRelacion(lastWords[i], word);
@@ -77,17 +74,48 @@ void leerArchivo()
 	}
 	else
 	{
-		wcout << "Error al abrir archivo\n";   //Debe ser wcout porque la consola esta en ese modo
+		std::wcout << "Error al abrir archivo\n";   //Debe ser wcout porque la consola esta en ese modo
+	}
+
+
+	// Se cambia la consola a utf-16 se le asigna a "m" para eliminar el warning 
+
+	int m = _setmode(_fileno(stdout), _O_U16TEXT);
+	estructura.ordenarAristas();
+	estructura.ordenarVertices();
+}
+
+
+void loopPreguntas() {
+	int entrada = 0;
+	std::wstring  textoIntro = L"Presione \nA: Resolver el problema a)\nB: Resolver el problema b)\nC: Resolver el problema c)\n";;
+	
+	while (entrada != 4) {
+		std::wcout << textoIntro;
+		std::wcin >> entrada;
+		switch (entrada)
+		{
+		case 1:
+			estructura.palabrasMasPoderosas(entrada);
+			break;
+
+		case 2:
+			estructura;
+			break;
+		case 3:
+			estructura;
+			break;
+		case 4:
+			break;
+		
+		default:
+			break;
+		}
 	}
 }
 
 int main()
 {
-	int m = _setmode(_fileno(stdout), _O_U16TEXT); // Se cambia la consola a utf-16 se le asigna a "m" para eliminar el warning 
 	leerArchivo();
-	estructura.ordenarAristas();
-	estructura.imprimirRelaciones();
-	//estructura.listarPoder();
-	estructura.ordenarVertices();
 	return 20;
 }

@@ -28,6 +28,7 @@ class Vertice
 public:
 	Vertice(std::wstring pPalabra);
 
+	int  getPoder();
 	void ordenarAristas();
 	void imprimirAristas();
 	void nuevaArista(Vertice* nodoLlegada);

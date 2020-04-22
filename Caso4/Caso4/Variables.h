@@ -42,8 +42,8 @@ const std::unordered_set <std::wstring> filtro
 	L"imposible",L"interesante",L"interior",L"inútil",L"izquierdo",L"joven",L"largo", L"lento",L"listo",L"masivo", L"mayor",L"no",
 	L"mejor",L"menor",L"mucho",L"muerto",L"musical",L"nacional",L"natural",L"negro",L"nuevo",L"peor",L"pequeño",L"perfecto",L"qué",L"si",
 	L"falso",L"famoso",L"feo",L"final",L"fresco",L"frío",L"fuerte",L"gordo",L"gran",L"grande",L"guapo",L"guay",L"húmedo",L"igual",L"que",
-	L"sano", L"seco",L"segundo",L"simple",L"sinvergüenza",L"social",L"solo",L"soso",L"tímido",L"tonto",L"triste",L"útil",L"jovén",L"cómo"
-	L"pobre",L"pouco",L"popular",L"posible",L"primer",L"primero",L"principal",L"próximo",L"raro",L"real",L"recto",L"rico",L"rojo",L"como"
+	L"sano", L"seco",L"segundo", L"simple", L"sinvergüenza",L"social",L"solo",L"soso",L"tímido",L"tonto",L"triste",L"útil",L"jovén",L"cómo"
+	L"pobre",L"pouco",L"popular",L"posible",L"primer",L"primero",L"principal",L"próximo",L"raro",L"real",L"recto",L"rico",L"rojo",L"como",L"pero"
 	});
 
 const std::unordered_set <std::wstring> filtroTerminaciones
