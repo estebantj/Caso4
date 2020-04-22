@@ -89,10 +89,11 @@ void leerArchivo()
 void loopPreguntas() {
 	int entrada = 0;
 	std::wstring  textoIntro = L"Presione \nA: Resolver el problema a)\nB: Resolver el problema b)\nC: Resolver el problema c)\n";;
-	
+	std::wstring palabra;
 	while (entrada != 4) {
 		std::wcout << textoIntro;
 		std::wcin >> entrada;
+
 		switch (entrada)
 		{
 		case 1:
@@ -100,7 +101,8 @@ void loopPreguntas() {
 			break;
 
 		case 2:
-			estructura;
+			estructura.palabrasMenosPoderosas(palabra);
+			palabra = L"";
 			break;
 		case 3:
 			estructura;
@@ -117,5 +119,6 @@ void loopPreguntas() {
 int main()
 {
 	leerArchivo();
+	loopPreguntas();
 	return 20;
 }
