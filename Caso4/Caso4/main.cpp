@@ -1,3 +1,5 @@
+#pragma warning(disable : 4996)
+
 #include <string>
 #include <fstream>
 #include <iostream>
@@ -10,6 +12,7 @@
 #include <fcntl.h> // for _O_U16TEXT
 #include "Variables.h"
 #include "Grafo.h"
+#include <Windows.h>
 
 static Grafo estructura;
 
@@ -78,48 +81,67 @@ void leerArchivo()
 	{
 		std::wcout << "Error al abrir archivo\n";   //Debe ser wcout porque la consola esta en ese modo
 	}
-
-
-	// Se cambia la consola a utf-16 se le asigna a "m" para eliminar el warning 
-
-	int m = _setmode(_fileno(stdout), _O_U16TEXT);
 	estructura.ordenarAristas();
 	estructura.ordenarVertices();
 }
 
-
 void loopPreguntas() {
 	int entrada = 0;
-	std::wstring  textoIntro = L"Presione \nA: Resolver el problema a)\nB: Resolver el problema b)\nC: Resolver el problema c)\n";;
+	std::wstring  textoIntro = L"Presione \n1: Resolver el problema a)\n2: Resolver el problema b)\n3: Resolver el problema c)\n4: Imprimir todas las relaciones\n5: Salir\n";;
 	std::wstring palabra;
-	while (entrada != 4) {
+	int cantidadMasPoderosas;
+	while (entrada != 5) {
 		std::wcout << textoIntro;
-		std::wcin >> entrada;
-
-		switch (entrada)
+		std::cin >> entrada;
+		if (entrada > 0 && entrada < 5) {
+			switch (entrada)
+				{
+				case 1:
+					std::wcout << L"Digite la cantidad de palabras: ";
+					std::cin >> cantidadMasPoderosas;
+					estructura.palabrasMasPoderosas(cantidadMasPoderosas);
+					std::wcout << std::endl;
+					break;
+				case 2:
+					std::wcout << L"Digite la palabra: ";
+					std::wcin >> palabra;
+					estructura.palabrasMenosPoderosas(palabra);
+					std::wcout << std::endl;
+					palabra.clear();
+					break;
+				case 3:
+					std::wcout << L"Digite la palabra: ";
+					std::wcin >> palabra;
+					estructura.gruposDePoder(palabra);
+					break;
+				case 4:
+					std::wcout << L"Digite la palabra o  digite '.' para mostrar todo: ";
+					//std::wcin >> palabra;
+					std::cin.ignore();
+					std::getline(std::wcin, palabra);
+					if (palabra == L".") palabra.clear();
+					estructura.imprimirRelaciones(palabra);
+					palabra.clear();
+					break;
+				default:
+					break;
+			}
+		}
+		else
 		{
-		case 1:
-			estructura.palabrasMasPoderosas(entrada);
-			break;
-
-		case 2:
-			estructura.palabrasMenosPoderosas(palabra);
-			palabra = L"";
-			break;
-		case 3:
-			estructura;
-			break;
-		case 4:
-			break;
-		
-		default:
-			break;
+			std::cin.clear();
+			std::cin.ignore(10000, '\n');
 		}
 	}
 }
 
-int main()
+int wmain()
 {
+	// Se cambia la consola a utf-16 se le asigna a "m" para eliminar el warning 
+	//int m = _setmode(_fileno(stdout), _O_U16TEXT);
+	setlocale(LC_ALL, "");
+	SetConsoleOutputCP(CP_UTF8);
+
 	leerArchivo();
 	loopPreguntas();
 	return 20;
