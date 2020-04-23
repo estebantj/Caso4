@@ -11,7 +11,6 @@
 #include "Variables.h"
 #include "Grafo.h"
 
-
 static Grafo estructura;
 
 void leerArchivo()
@@ -26,8 +25,8 @@ void leerArchivo()
 		//Variables de vertices 
 		wchar_t caracter;
 		std::wstring word;
-		std::wstring lastWords[2000];
-
+		std::wstring lastWords[10];
+		int arraySize = std::size(lastWords);
 		while (archivo.get(caracter))
 		{
 			if (iswalpha(caracter) || caracter == ' ' || caracter == '\n')
@@ -40,6 +39,10 @@ void leerArchivo()
 					if (caracter == '\n') 
 					{
 						//TODO: Needs to be checked
+						for (int i = 0; i < arraySize - 1; i++)
+						{
+							lastWords[i].clear();
+						}
 					}
 					if (!word.empty())
 					{
@@ -56,8 +59,7 @@ void leerArchivo()
 							filtroTerminaciones.find(subString3) == filtroTerminaciones.end() &&
 							filtroTerminaciones.find(subString4) == filtroTerminaciones.end())
 						{
-							//wcout << word << "\n";
-							int arraySize = std::size(lastWords);
+							//wcout << word << "\n";							
 							for (int i=0; i < arraySize-1; i++ )
 							{
 								if (!lastWords[i].empty()) estructura.nuevaRelacion(lastWords[i], word);

@@ -84,7 +84,7 @@ void Grafo::palabrasMasPoderosas(int cantidad)
 }
 
 void Grafo::palabrasMenosPoderosas(std::wstring pPalabra) {
-	std::unordered_map<std::wstring,Vertice*>::iterator it = vertices.find(pPalabra);
+	MAP::iterator it = vertices.find(pPalabra);
 	if (it == vertices.end()) {
 		std::wcout << L"La palabra no existe en el Grafo";
 		return;
