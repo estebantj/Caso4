@@ -28,6 +28,7 @@ class Vertice
 public:
 	Vertice(std::wstring pPalabra);
 
+	int  getPoder();
 	void ordenarAristas();
 	void imprimirAristas();
 	void nuevaArista(Vertice* nodoLlegada);
@@ -35,6 +36,7 @@ public:
 
 private:
 	int poder;
+	int cantMenorPoder;
 	std::wstring palabra;
 	std::vector<Arista*> aristas;
 	std::unordered_map<std::wstring, Arista*> mapaAristasExistentes;

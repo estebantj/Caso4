@@ -32,6 +32,11 @@ void Vertice::nuevaArista(Vertice* nodoLlegada)
 	}
 }
 
+int Vertice::getPoder()
+{
+	return poder;
+}
+
 void Vertice::ordenarAristas()
 {
 	std::sort(aristas.begin(), aristas.end(), [](const Arista* lhs, const Arista* rhs)
