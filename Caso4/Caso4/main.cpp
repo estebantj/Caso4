@@ -90,30 +90,46 @@ void leerArchivo()
 
 void loopPreguntas() {
 	int entrada = 0;
-	std::wstring  textoIntro = L"Presione \nA: Resolver el problema a)\nB: Resolver el problema b)\nC: Resolver el problema c)\n";;
+	std::wstring  textoIntro = L"Presione \n1: Resolver el problema a)\n2: Resolver el problema b)\n3: Resolver el problema c)\n4: Imprimir todas las relaciones\n5: Salir\n";;
 	std::wstring palabra;
-	while (entrada != 4) {
+	int cantidadMasPoderosas;
+	while (entrada != 5) {
 		std::wcout << textoIntro;
-		std::wcin >> entrada;
-
-		switch (entrada)
+		std::cin >> entrada;
+		if (entrada > 0 && entrada < 5) {
+			switch (entrada)
+				{
+				case 1:
+					std::wcout << L"Digite la cantidad de palabras: ";
+					std::cin >> cantidadMasPoderosas;
+					estructura.palabrasMasPoderosas(cantidadMasPoderosas);
+					std::wcout << std::endl;
+					break;
+				case 2:
+					std::wcout << L"Digite la palabra: ";
+					std::wcin >> palabra;
+					estructura.palabrasMenosPoderosas(palabra);
+					std::wcout << std::endl;
+					palabra.clear();
+					break;
+				case 3:
+					estructura;
+					break;
+				case 4:
+					std::wcout << L"Digite la palabra: ";
+					std::cin.ignore();
+					std::getline(std::wcin, palabra);
+					estructura.imprimirRelaciones(palabra);
+					palabra.clear();
+					break;
+				default:
+					break;
+			}
+		}
+		else
 		{
-		case 1:
-			estructura.palabrasMasPoderosas(entrada);
-			break;
-
-		case 2:
-			estructura.palabrasMenosPoderosas(palabra);
-			palabra = L"";
-			break;
-		case 3:
-			estructura;
-			break;
-		case 4:
-			break;
-		
-		default:
-			break;
+			std::cin.clear();
+			std::cin.ignore(10000, '\n');
 		}
 	}
 }

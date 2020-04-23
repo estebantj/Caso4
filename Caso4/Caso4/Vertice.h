@@ -9,7 +9,7 @@
 class Vertice;
 class Arista;
 
-typedef std::unordered_map<std::wstring, Arista*> mapType;
+typedef std::unordered_map<std::wstring, Arista*> mapAristasType;
 
 class Arista
 {
@@ -31,6 +31,7 @@ public:
 	int  getPoder();
 	void ordenarAristas();
 	void imprimirAristas();
+	void palabrasMenosPoderosas();
 	void nuevaArista(Vertice* nodoLlegada);
 	Arista* buscarArista(std::wstring pPalabra);
 
