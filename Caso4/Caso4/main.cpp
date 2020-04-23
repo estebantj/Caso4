@@ -89,7 +89,7 @@ void loopPreguntas() {
 	int entrada = 0;
 	std::wstring  textoIntro = L"Presione \n1: Resolver el problema a)\n2: Resolver el problema b)\n3: Resolver el problema c)\n4: Imprimir todas las relaciones\n5: Salir\n";;
 	std::wstring palabra;
-	int cantidadMasPoderosas;
+	int cantidadMasPoderosas = 0;
 	while (entrada != 5) {
 		std::wcout << textoIntro;
 		std::cin >> entrada;
@@ -138,9 +138,8 @@ void loopPreguntas() {
 int wmain()
 {
 	// Se cambia la consola a utf-16 se le asigna a "m" para eliminar el warning 
-	//int m = _setmode(_fileno(stdout), _O_U16TEXT);
-	setlocale(LC_ALL, "");
-	SetConsoleOutputCP(CP_UTF8);
+	int m = _setmode(_fileno(stdout), _O_U16TEXT);
+	//setlocale(LC_ALL, "");
 
 	leerArchivo();
 	loopPreguntas();
