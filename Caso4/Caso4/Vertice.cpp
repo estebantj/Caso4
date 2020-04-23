@@ -47,26 +47,22 @@ void Vertice::ordenarAristas()
 
 void Vertice::imprimirAristas()
 {
-	for (auto it : aristas) 
+	for (auto it : aristas)
 	{
-		
 		Arista* aristaDeVuelta = it->verticeLlegada->buscarArista(this->palabra);
 		int pesoIda = it->peso;
 		int pesoDeVuelta = (aristaDeVuelta != nullptr) ? aristaDeVuelta->peso : 0;
-		
-		/*
+		std::wstring textoRelaciones = it->verticeLlegada->palabra;
 		if (pesoIda > 1)
 		{
-			std::wcout << it->verticeLlegada->palabra << " --- Peso ida: " << pesoIda << "\n";
+			textoRelaciones.append(L" --- Peso ida: " + std::to_wstring(pesoIda));
 		}
-		*/
-
 		if (pesoDeVuelta > 1)
 		{
-			std::wcout << it->verticeLlegada->palabra << " --- Peso de vuelta: " << pesoDeVuelta << "\n";
+			textoRelaciones.append(L" --- Peso de vuelta: " + std::to_wstring(pesoDeVuelta));
 		}
+		if (pesoIda > 1 || pesoDeVuelta > 1) std::wcout << textoRelaciones << std::endl;
 	}
-	std::wcout << std::endl;
 }
 
 void Vertice::palabrasMenosPoderosas()
@@ -85,11 +81,15 @@ void Vertice::palabrasMenosPoderosas()
 			}
 			else // Gana por default (no hay arista de regreso o tiene peso 1)
 			{
-				
 				std::wcout << L"Palabra: " + thisArista->verticeLlegada->palabra + L" --- Peso de ida: " + std::to_wstring(thisArista->peso) + L" --- Gano por default\n";
 			}
 		}
 		else
 			break;
 	}
+}
+
+void Vertice::gruposDePoder()
+{
+
 }

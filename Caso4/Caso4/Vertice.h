@@ -29,6 +29,7 @@ public:
 	Vertice(std::wstring pPalabra);
 
 	int  getPoder();
+	void gruposDePoder();
 	void ordenarAristas();
 	void imprimirAristas();
 	void palabrasMenosPoderosas();

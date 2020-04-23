@@ -20,7 +20,7 @@ void Grafo::nuevaRelacion(std::wstring pPalabraSalida, std::wstring pPalabraLleg
 		primeraPalabra = (vertices.insert({ pPalabraSalida, nodoPrimeraPalabra })).first;
 
 	}
-	else 
+	else
 		nodoPrimeraPalabra = primeraPalabra->second;
 
 	if (segundaPalabra == vertices.end())
@@ -28,9 +28,9 @@ void Grafo::nuevaRelacion(std::wstring pPalabraSalida, std::wstring pPalabraLleg
 		nodoSegundaPalabra = new Vertice(pPalabraLlegada);
 		segundaPalabra = (vertices.insert({ pPalabraLlegada, nodoSegundaPalabra })).first;
 	}
-	else 
+	else
 		nodoSegundaPalabra = segundaPalabra->second;
-	
+
 	nodoPrimeraPalabra->nuevaArista(nodoSegundaPalabra);
 }
 
@@ -38,7 +38,7 @@ void Grafo::imprimirRelaciones(std::wstring pPalabra)
 {
 	if (pPalabra.empty())
 	{
-		for (auto& it : vertices) 
+		for (auto& it : vertices)
 		{
 			std::wcout << L"########### Relaciones de " << it.second->palabra << " ######################\n";
 			it.second->imprimirAristas();
@@ -56,6 +56,7 @@ void Grafo::imprimirRelaciones(std::wstring pPalabra)
 			std::wcout << L"Palabra no encontrada\n";
 	}
 }
+
 
 void Grafo::ordenarAristas()
 {
@@ -80,9 +81,9 @@ void Grafo::ordenarVertices()
 //Resuelve pregunta A)
 void Grafo::palabrasMasPoderosas(int cantidad)
 {
-	std::wcout<< L"\nLas "+std::to_wstring(cantidad)+L" palabras con mayor poder son las siguientes: \n";
+	std::wcout << L"\nLas " + std::to_wstring(cantidad) + L" palabras con mayor poder son las siguientes: \n";
 
-	for (int i = 0; i < cantidad;i++) std::wcout << verticesOrdenados.at(i)->palabra +L": con un poder de " + std::to_wstring(verticesOrdenados.at(i)->poder) + L"\n";
+	for (int i = 0; i < cantidad; i++) std::wcout << verticesOrdenados.at(i)->palabra + L": con un poder de " + std::to_wstring(verticesOrdenados.at(i)->poder) + L"\n";
 }
 
 void Grafo::palabrasMenosPoderosas(std::wstring pPalabra) {
@@ -92,4 +93,14 @@ void Grafo::palabrasMenosPoderosas(std::wstring pPalabra) {
 		return;
 	}
 	it->second->palabrasMenosPoderosas();
+}
+
+void Grafo::gruposDePoder(std::wstring pPalabra)
+{
+	mapVerticesType::iterator it = vertices.find(pPalabra);
+	if (it == vertices.end()) {
+		std::wcout << L"La palabra no existe en el Grafo";
+		return;
+	}
+	it->second->gruposDePoder();
 }

@@ -1,3 +1,5 @@
+#pragma warning(disable : 4996)
+
 #include <string>
 #include <fstream>
 #include <iostream>
@@ -10,6 +12,7 @@
 #include <fcntl.h> // for _O_U16TEXT
 #include "Variables.h"
 #include "Grafo.h"
+#include <Windows.h>
 
 static Grafo estructura;
 
@@ -78,15 +81,9 @@ void leerArchivo()
 	{
 		std::wcout << "Error al abrir archivo\n";   //Debe ser wcout porque la consola esta en ese modo
 	}
-
-
-	// Se cambia la consola a utf-16 se le asigna a "m" para eliminar el warning 
-
-	int m = _setmode(_fileno(stdout), _O_U16TEXT);
 	estructura.ordenarAristas();
 	estructura.ordenarVertices();
 }
-
 
 void loopPreguntas() {
 	int entrada = 0;
@@ -113,12 +110,16 @@ void loopPreguntas() {
 					palabra.clear();
 					break;
 				case 3:
-					estructura;
+					std::wcout << L"Digite la palabra: ";
+					std::wcin >> palabra;
+					estructura.gruposDePoder(palabra);
 					break;
 				case 4:
-					std::wcout << L"Digite la palabra: ";
+					std::wcout << L"Digite la palabra o  digite '.' para mostrar todo: ";
+					//std::wcin >> palabra;
 					std::cin.ignore();
 					std::getline(std::wcin, palabra);
+					if (palabra == L".") palabra.clear();
 					estructura.imprimirRelaciones(palabra);
 					palabra.clear();
 					break;
@@ -134,8 +135,13 @@ void loopPreguntas() {
 	}
 }
 
-int main()
+int wmain()
 {
+	// Se cambia la consola a utf-16 se le asigna a "m" para eliminar el warning 
+	//int m = _setmode(_fileno(stdout), _O_U16TEXT);
+	setlocale(LC_ALL, "");
+	SetConsoleOutputCP(CP_UTF8);
+
 	leerArchivo();
 	loopPreguntas();
 	return 20;
