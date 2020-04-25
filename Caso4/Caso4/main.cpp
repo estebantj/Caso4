@@ -90,6 +90,7 @@ void loopPreguntas() {
 	std::wstring  textoIntro = L"Presione \n1: Resolver el problema a)\n2: Resolver el problema b)\n3: Resolver el problema c)\n4: Imprimir todas las relaciones\n5: Salir\n";;
 	std::wstring palabra;
 	int cantidadMasPoderosas = 0;
+	int k = 0;
 	while (entrada != 5) {
 		std::wcout << textoIntro;
 		std::cin >> entrada;
@@ -104,15 +105,18 @@ void loopPreguntas() {
 					break;
 				case 2:
 					std::wcout << L"Digite la palabra: ";
-					std::wcin >> palabra;
+					std::cin.ignore();
+					std::getline(std::wcin, palabra);
 					estructura.palabrasMenosPoderosas(palabra);
-					std::wcout << std::endl;
 					palabra.clear();
 					break;
 				case 3:
 					std::wcout << L"Digite la palabra: ";
-					std::wcin >> palabra;
-					estructura.gruposDePoder(palabra);
+					std::cin.ignore();
+					std::getline(std::wcin, palabra);
+					std::wcout << "Digite K: ";
+					std::wcin >> k;
+					estructura.gruposDePoder(palabra, k);
 					break;
 				case 4:
 					std::wcout << L"Digite la palabra o  digite '.' para mostrar todo: ";
@@ -129,6 +133,7 @@ void loopPreguntas() {
 		}
 		else
 		{
+			std::wcout << "Dato erroneo\n";
 			std::cin.clear();
 			std::cin.ignore(10000, '\n');
 		}

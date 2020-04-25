@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include <iostream>
 #include <algorithm>
+#include <unordered_set>
 
 class Vertice;
 class Arista;
@@ -29,12 +30,12 @@ public:
 	Vertice(std::wstring pPalabra);
 
 	int  getPoder();
-	void gruposDePoder();
 	void ordenarAristas();
 	void imprimirAristas();
 	void palabrasMenosPoderosas();
 	void nuevaArista(Vertice* nodoLlegada);
 	Arista* buscarArista(std::wstring pPalabra);
+	
 
 private:
 	int poder;
