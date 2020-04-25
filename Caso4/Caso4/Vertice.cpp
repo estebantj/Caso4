@@ -88,8 +88,3 @@ void Vertice::palabrasMenosPoderosas()
 			break;
 	}
 }
-
-void Vertice::gruposDePoder()
-{
-
-}
