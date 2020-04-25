@@ -13,8 +13,12 @@
 #include "Variables.h"
 #include "Grafo.h"
 #include <Windows.h>
+#include <istream>
+#include <iostream>  
 
-static Grafo estructura;
+static Grafo estructura;	
+//typedef basic_istream<wchar_t> wistream;
+
 
 void leerArchivo()
 {
@@ -87,45 +91,49 @@ void leerArchivo()
 
 void loopPreguntas() {
 	int entrada = 0;
-	std::wstring  textoIntro = L"Presione \n1: Resolver el problema a)\n2: Resolver el problema b)\n3: Resolver el problema c)\n4: Imprimir todas las relaciones\n5: Salir\n";;
+	std::wstring  textoIntro = L"Presione \n1: Resolver el problema a)\n2: Resolver el problema b)\n3: Resolver el problema c)\n4: Imprimir todas las relaciones\n5: CLS\n6: Salir\n";;
 	std::wstring palabra;
 	int cantidadMasPoderosas = 0;
 	int k = 0;
-	while (entrada != 5) {
+	while (entrada != 6) {
+		
 		std::wcout << textoIntro;
-		std::cin >> entrada;
-		if (entrada > 0 && entrada < 5) {
+		std::wcin >> entrada;
+		if (entrada > 0 && entrada < 6) {
 			switch (entrada)
 				{
 				case 1:
 					std::wcout << L"Digite la cantidad de palabras: ";
-					std::cin >> cantidadMasPoderosas;
+					std::wcin >> cantidadMasPoderosas;
 					estructura.palabrasMasPoderosas(cantidadMasPoderosas);
 					std::wcout << std::endl;
 					break;
 				case 2:
 					std::wcout << L"Digite la palabra: ";
-					std::cin.ignore();
+					std::wcin.ignore();
 					std::getline(std::wcin, palabra);
 					estructura.palabrasMenosPoderosas(palabra);
 					palabra.clear();
 					break;
 				case 3:
 					std::wcout << L"Digite la palabra: ";
-					std::cin.ignore();
+					std::wcin.ignore();	
 					std::getline(std::wcin, palabra);
-					std::wcout << "Digite K: ";
+					std::wcout << palabra;
 					std::wcin >> k;
 					estructura.gruposDePoder(palabra, k);
 					break;
 				case 4:
 					std::wcout << L"Digite la palabra o  digite '.' para mostrar todo: ";
 					//std::wcin >> palabra;
-					std::cin.ignore();
+					std::wcin.ignore();
 					std::getline(std::wcin, palabra);
 					if (palabra == L".") palabra.clear();
 					estructura.imprimirRelaciones(palabra);
 					palabra.clear();
+					break;
+				case 5: 
+					system("CLS");
 					break;
 				default:
 					break;
@@ -144,6 +152,8 @@ int wmain()
 {
 	// Se cambia la consola a utf-16 se le asigna a "m" para eliminar el warning 
 	int m = _setmode(_fileno(stdout), _O_U16TEXT);
+	int m2 = _setmode(_fileno(stdin), _O_U16TEXT);
+	
 	//setlocale(LC_ALL, "");
 
 	leerArchivo();

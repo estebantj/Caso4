@@ -87,7 +87,7 @@ void Grafo::palabrasMasPoderosas(int cantidad)
 void Grafo::palabrasMenosPoderosas(std::wstring pPalabra) {
 	mapVerticesType::iterator it = vertices.find(pPalabra);
 	if (it == vertices.end()) {
-		std::wcout << L"La palabra no existe en el Grafo";
+		std::wcout << L"\nLa palabra no existe en el Grafo";
 		return;
 	}
 	it->second->palabrasMenosPoderosas();
@@ -97,22 +97,23 @@ void Grafo::gruposDePoder(std::wstring pPalabra, int pK)
 {
 	mapVerticesType::iterator it = vertices.find(pPalabra);
 	if (it == vertices.end()) {
-		std::wcout << L"La palabra no existe en el Grafo";
+		std::wcout << L"\nLa palabra no existe en el Grafo";
 		return;
 	}
 	std::unordered_set<std::wstring> verticesVisitados;
-	std::wcout << "Grupos de poder relacionados con la palabra: " << it->second->palabra << "\n";
+	std::wcout << "\n\nGrupos de poder relacionados con la palabra: " << it->second->palabra << "\n";
 	int contador = 1;
 	for (int cont = 0; cont < it->second->aristas.size(); cont++) 
 	{
 		if (it->second->aristas[cont]->peso < 2) break;
 		if (contador > pK) break;
 
-		std::wcout << "-- Grupo #" << contador << "\n";
+		std::wcout << "--- Grupo #" << contador << " ---\n";
 		std::wstring camino = buscarCaminoMasPoderoso(it->second->aristas[cont]->verticeLlegada, &verticesVisitados);
-		std::wcout << camino << "\n";
+		std::wcout << camino << "\n\n";
 		contador++;
 	}
+	std::wcout << "\n";
 }
 
 std::wstring Grafo::buscarCaminoMasPoderoso(Vertice* pVertice, std::unordered_set<std::wstring>* pVerticesVisistados)
