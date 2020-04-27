@@ -100,9 +100,11 @@ void Grafo::gruposDePoder(std::wstring pPalabra, int pK)
 		std::wcout << L"\nLa palabra no existe en el Grafo";
 		return;
 	}
+
 	std::unordered_set<std::wstring> verticesVisitados;
 	std::wcout << "\n\nGrupos de poder relacionados con la palabra: " << it->second->palabra << "\n";
 	int contador = 1;
+
 	for (int cont = 0; cont < it->second->aristas.size(); cont++) 
 	{
 		if (it->second->aristas[cont]->peso < 2) break;

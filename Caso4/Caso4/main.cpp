@@ -32,7 +32,7 @@ void leerArchivo()
 		//Variables de vertices 
 		wchar_t caracter;
 		std::wstring word;
-		std::wstring lastWords[10];
+		std::wstring lastWords[6];
 		int arraySize = std::size(lastWords);
 		while (archivo.get(caracter))
 		{
