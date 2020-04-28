@@ -43,6 +43,7 @@ void Vertice::ordenarAristas()
 		{
 			return lhs->peso > rhs->peso;
 		});
+	this->nextToVisit = aristas.begin();
 }
 
 void Vertice::imprimirAristas()
@@ -65,9 +66,14 @@ void Vertice::imprimirAristas()
 	}
 }
 
+void Vertice::asignarNextToVist()
+{
+	this->nextToVisit = aristas.begin();
+}
+
 void Vertice::palabrasMenosPoderosas()
 {
-	for (auto thisArista : aristas)
+	for (auto thisArista : aristas) //F(n) = O(n) con n siendo la cantidad de aristas
 	{
 		if (thisArista->peso > 1)
 		{
