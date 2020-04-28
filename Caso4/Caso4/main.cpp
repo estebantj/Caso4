@@ -119,9 +119,10 @@ void loopPreguntas() {
 					std::wcout << L"Digite la palabra: ";
 					std::wcin.ignore();	
 					std::getline(std::wcin, palabra);
-					std::wcout << palabra;
+					std::wcout << "Digite K: " ;
 					std::wcin >> k;
 					estructura.gruposDePoder(palabra, k);
+					estructura.asignarNextToVist();
 					break;
 				case 4:
 					std::wcout << L"Digite la palabra o  digite '.' para mostrar todo: ";

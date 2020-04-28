@@ -76,6 +76,14 @@ void Grafo::ordenarVertices()
 	);
 }
 
+void Grafo::asignarNextToVist()
+{
+	for (auto& it : vertices)
+	{
+		it.second->asignarNextToVist();
+	}
+}
+
 //Resuelve pregunta A)
 void Grafo::palabrasMasPoderosas(int cantidad)
 {
@@ -95,39 +103,63 @@ void Grafo::palabrasMenosPoderosas(std::wstring pPalabra) {
 
 void Grafo::gruposDePoder(std::wstring pPalabra, int pK)
 {
-	mapVerticesType::iterator it = vertices.find(pPalabra);
-	if (it == vertices.end()) {
+	mapVerticesType::iterator verticeInicial = vertices.find(pPalabra);
+	if (verticeInicial == vertices.end()) {
 		std::wcout << L"\nLa palabra no existe en el Grafo";
 		return;
 	}
 
-	std::unordered_set<std::wstring> verticesVisitados;
-	std::wcout << "\n\nGrupos de poder relacionados con la palabra: " << it->second->palabra << "\n";
-	int contador = 1;
-
-	for (int cont = 0; cont < it->second->aristas.size(); cont++) 
+	std::wcout << "\n\nGrupos de poder relacionados con la palabra: " << verticeInicial->second->palabra << "\n";
+	float groupSize;
+	bool huboResiduo = false;
+	float cantidadDeVertices = (float)this->verticesOrdenados.size();
+	if (pK <= cantidadDeVertices)
 	{
-		if (it->second->aristas[cont]->peso < 2) break;
-		if (contador > pK) break;
+		groupSize =  cantidadDeVertices / (float) pK;
+		if (groupSize != (int)groupSize) huboResiduo = true;
+	}
+	else
+	{
+		std::wcout << "El k es mayor a la cantidad de vertices, cantidad de vertices: " << cantidadDeVertices;
+		return;
+	}
 
+	int contador = 1;
+	groupSize++;
+	this->verticeInicial = verticeInicial->second;
+	for (auto thisArista : verticeInicial->second->aristas) // F(n) = O(n) con n = k
+	{
+		if (contador > pK) break;
+		if (contador == pK && huboResiduo) groupSize--;
 		std::wcout << "--- Grupo #" << contador << " ---\n";
-		std::wstring camino = buscarCaminoMasPoderoso(it->second->aristas[cont]->verticeLlegada, &verticesVisitados);
+		Vertice* nextVertice = thisArista->verticeLlegada;
+		std::wstring camino = buscarCaminoMasPoderoso(nextVertice, (int)groupSize);
 		std::wcout << camino << "\n\n";
 		contador++;
 	}
 	std::wcout << "\n";
 }
 
-std::wstring Grafo::buscarCaminoMasPoderoso(Vertice* pVertice, std::unordered_set<std::wstring>* pVerticesVisistados)
+/*	Nota	
+	El nextToVisit permite que se vuelva a aun vertice porque las relaciones son con direccion.
+	Y al utilizar esta direccion el nextToVisit se actualiza para apuntar a otra relacion.
+*/
+std::wstring Grafo::buscarCaminoMasPoderoso(Vertice* pVerticeSalida, int pGroupSize)
 {
 	std::wstring camino;
+	Vertice* verticeActual = pVerticeSalida;
+	int actualGroupSize = 0;
+	
+	while (actualGroupSize < pGroupSize) {
+		camino += verticeActual->palabra + L" -> ";
 
-	Vertice* thisVertice = pVertice;
+		std::vector<Arista*>::iterator* nextToVisit = &verticeActual->nextToVisit;
+		if (*nextToVisit == verticeActual->aristas.end()) break;
 
-	pVerticesVisistados->insert({ pVertice->palabra });
-	while (thisVertice != nullptr) {
-		camino += thisVertice->palabra + L" -> ";
-		thisVertice = thisVertice->aristas[0]->peso > 1 ? thisVertice->aristas[0]->verticeLlegada : nullptr;
+		verticeActual = (*(*nextToVisit))->verticeLlegada;
+		if (verticeActual == this->verticeInicial) break;
+		++(*nextToVisit);
+		actualGroupSize++;
 	}
 
 	return camino;

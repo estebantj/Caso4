@@ -32,6 +32,7 @@ public:
 	int  getPoder();
 	void ordenarAristas();
 	void imprimirAristas();
+	void asignarNextToVist();
 	void palabrasMenosPoderosas();
 	void nuevaArista(Vertice* nodoLlegada);
 	Arista* buscarArista(std::wstring pPalabra);
@@ -43,6 +44,7 @@ private:
 	std::wstring palabra;
 	std::vector<Arista*> aristas;
 	std::unordered_map<std::wstring, Arista*> mapaAristasExistentes;
+	std::vector<Arista*>::iterator nextToVisit;
 
 	friend class Grafo;
 };

@@ -43,6 +43,7 @@ void Vertice::ordenarAristas()
 		{
 			return lhs->peso > rhs->peso;
 		});
+	this->nextToVisit = aristas.begin();
 }
 
 void Vertice::imprimirAristas()
@@ -63,6 +64,11 @@ void Vertice::imprimirAristas()
 		}
 		if (pesoIda > 1 || pesoDeVuelta > 1) std::wcout << textoRelaciones << std::endl;
 	}
+}
+
+void Vertice::asignarNextToVist()
+{
+	this->nextToVisit = aristas.begin();
 }
 
 void Vertice::palabrasMenosPoderosas()
