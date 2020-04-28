@@ -85,14 +85,21 @@ void Grafo::asignarNextToVist()
 }
 
 //Resuelve pregunta A)
-void Grafo::palabrasMasPoderosas(int cantidad)
+void Grafo::palabrasMasPoderosas(int cantidad) //F(n) = O(n) siendo el n la cantidad de elementos solicitados
 {
-	std::wcout << L"\nLas " + std::to_wstring(cantidad) + L" palabras con mayor poder son las siguientes: \n";
 
+	if (verticesOrdenados.size() < cantidad) { //2 tiempos
+		std::wcout << L"\nNo existen tantos vertices en la estructura"; //1 tiempo
+		return; //1 tiempo
+	}
+	std::wcout << L"\nLas " + std::to_wstring(cantidad) + L" palabras con mayor poder son las siguientes: \n"; //3 tiempos
+	
 	for (int i = 0; i < cantidad; i++) std::wcout << verticesOrdenados.at(i)->palabra + L": con un poder de " + std::to_wstring(verticesOrdenados.at(i)->poder) + L"\n";
+	//for tiene tiempo n donde la n es cantidad
+
 }
 
-void Grafo::palabrasMenosPoderosas(std::wstring pPalabra) {
+void Grafo::palabrasMenosPoderosas(std::wstring pPalabra) { //F(n) = O(c)
 	mapVerticesType::iterator it = vertices.find(pPalabra);
 	if (it == vertices.end()) {
 		std::wcout << L"\nLa palabra no existe en el Grafo";

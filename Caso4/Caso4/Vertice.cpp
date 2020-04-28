@@ -73,21 +73,23 @@ void Vertice::asignarNextToVist()
 
 void Vertice::palabrasMenosPoderosas()
 {
-	for (auto thisArista : aristas) //F(n) = O(n) con n siendo la cantidad de aristas
+	for (auto thisArista : aristas) //F(n) = O(n) con n siendo la cantidad de aristas del vertice por evalua (el P)
 	{
-		if (thisArista->peso > 1)
+		if (thisArista->peso > 1) //2 tiempos
 		{
-			Arista* aristaDeRegreso = thisArista->verticeLlegada->buscarArista(this->palabra);
-			if (aristaDeRegreso != nullptr && aristaDeRegreso->peso > 1)
+			Arista* aristaDeRegreso = thisArista->verticeLlegada->buscarArista(this->palabra); //6 tiempos
+			if (aristaDeRegreso != nullptr && aristaDeRegreso->peso > 1) //4 tiempos
 			{
-				if (thisArista->peso > aristaDeRegreso->peso)
+				if (thisArista->peso > aristaDeRegreso->peso) //3 tiempos
 				{
 					std::wcout << L"Palabra: " + thisArista->verticeLlegada->palabra + L" --- Peso de ida: " + std::to_wstring(thisArista->peso) + L" --- Peso de vuelta: " + std::to_wstring(aristaDeRegreso->peso) + L"\n";
+					//11 tiempos
 				}
 			}
 			else // Gana por default (no hay arista de regreso o tiene peso 1)
 			{
 				std::wcout << L"Palabra: " + thisArista->verticeLlegada->palabra + L" --- Peso de ida: " + std::to_wstring(thisArista->peso) + L" --- Gano por default\n";
+				//11tiempos
 			}
 		}
 		else
