@@ -1,11 +1,11 @@
 #include "Vertice.h"
 
-Vertice::Vertice(std::wstring pPalabra)
+Vertice::Vertice(std::wstring pPalabra) // F(n) = O(c) 
 {
 	this->palabra = pPalabra;
 }
 
-Arista* Vertice::buscarArista(std::wstring pPalabra)
+Arista* Vertice::buscarArista(std::wstring pPalabra) // F(n) = O(c)
 {
 	mapAristasType::iterator arista = mapaAristasExistentes.find(pPalabra);
 	if (arista != mapaAristasExistentes.end())
@@ -15,7 +15,7 @@ Arista* Vertice::buscarArista(std::wstring pPalabra)
 	return nullptr;
 }
 
-void Vertice::nuevaArista(Vertice* nodoLlegada)
+void Vertice::nuevaArista(Vertice* nodoLlegada) // F(n) = O(c)
 {
 	mapAristasType::iterator aristaPair = mapaAristasExistentes.find(nodoLlegada->palabra);
 	if (aristaPair == mapaAristasExistentes.end())
@@ -32,12 +32,12 @@ void Vertice::nuevaArista(Vertice* nodoLlegada)
 	}
 }
 
-int Vertice::getPoder()
+int Vertice::getPoder() // F(n) = O(c)
 {
 	return poder;
 }
 
-void Vertice::ordenarAristas()
+void Vertice::ordenarAristas() // F(n) = O(nlogn)
 {
 	std::sort(aristas.begin(), aristas.end(), [](const Arista* lhs, const Arista* rhs)
 		{
@@ -46,7 +46,7 @@ void Vertice::ordenarAristas()
 	this->nextToVisit = aristas.begin();
 }
 
-void Vertice::imprimirAristas()
+void Vertice::imprimirAristas() // F(n) = O(n)
 {
 	for (auto it : aristas)
 	{
@@ -66,14 +66,14 @@ void Vertice::imprimirAristas()
 	}
 }
 
-void Vertice::asignarNextToVist()
+void Vertice::asignarNextToVist() // F(n) = O(c)
 {
 	this->nextToVisit = aristas.begin();
 }
 
-void Vertice::palabrasMenosPoderosas()
+void Vertice::palabrasMenosPoderosas() //F(n) = O(n) con n siendo la cantidad de aristas del vertice por evalua (el P)
 {
-	for (auto thisArista : aristas) //F(n) = O(n) con n siendo la cantidad de aristas
+	for (auto thisArista : aristas) 
 	{
 		if (thisArista->peso > 1)
 		{
@@ -85,7 +85,7 @@ void Vertice::palabrasMenosPoderosas()
 					std::wcout << L"Palabra: " + thisArista->verticeLlegada->palabra + L" --- Peso de ida: " + std::to_wstring(thisArista->peso) + L" --- Peso de vuelta: " + std::to_wstring(aristaDeRegreso->peso) + L"\n";
 				}
 			}
-			else // Gana por default (no hay arista de regreso o tiene peso 1)
+			else
 			{
 				std::wcout << L"Palabra: " + thisArista->verticeLlegada->palabra + L" --- Peso de ida: " + std::to_wstring(thisArista->peso) + L" --- Gano por default\n";
 			}
