@@ -1,0 +1,107 @@
+double angle = -5;
+
+float x1 = 0;
+float y1 = -50;
+
+float x2 = 0;
+float y2 = 50;
+
+float screenCenterX = 0;
+float screenCenterY = 0;
+
+ArrayList<float[]> posIzquierdas;
+
+/*
+class Circulo
+{
+  float x;
+  float y;
+  float r;
+  boolean posPositiva;
+  
+  Circulo(int pX, int pY, int pR)
+  {
+    this.x = pX;
+    this.y = pY;
+    this.r = pR;
+    this.posPositiva = pX > 0 ? false : true;
+  }
+  void dibujar() 
+  {
+      circle(this.x, this.y, this.r);
+      if (posPositiva)
+      {
+        println(angle);
+      }
+  }
+
+  void aumentar()
+  {
+
+    if (posPositiva) stroke(0,255,0);
+    else stroke(255,0,0);
+    noFill();
+    double xangle = (angle ) * (Math.PI/180); // Convert to radians
+    float rotatedY = (float)(Math.sin(xangle) * (this.x - 0) + Math.cos(xangle) * (this.y - 0) + 0);
+
+    float rotatedX = (float)(Math.cos(xangle) * (this.x - 0) - Math.sin(xangle) * (this.y-0) + 0);
+
+    this.x = rotatedX;
+    this.y = rotatedY;
+    /*
+    if (posPositiva)
+    {
+      if (this.x <= 0) {
+        angle = 1;
+        this.x = this.x +0.5;
+      }else angle =  -1;
+    }
+    
+  }
+}
+*/
+
+void interpolacion()
+{
+  // Primeros 180 grados
+  int cantPosiciones = 180/(int)angle;
+  posIzquierdas.add(new float[]{x1, y1});
+  for (int i = 0; i < cantPosiciones; ++i) {
+    float point[] = posIzquierdas.get(i);
+
+    double angleRadians = (angle ) * (Math.PI/180); // Convert to radians
+    double rotatedX = Math.cos(angleRadians) * (point[0] - screenCenterX) - Math.sin(angleRadians) * (point[1] - screenCenterY) + screenCenterX;
+    double rotatedY = Math.sin(angleRadians) * (point[0] - screenCenterX) + Math.cos(angleRadians) * (point[1] - screenCenterY) + screenCenterY;
+    
+    posIzquierdas.add(new float[]{(float)rotatedX, (float)rotatedY});
+  }
+
+  for (int i = 0; i < cantPosiciones; ++i) {
+    float point[] = posIzquierdas.get(posIzquierdas.size() - 1);
+
+    double angleRadians = (-angle ) * (Math.PI/180); // Convert to radians
+    double rotatedX = Math.cos(angleRadians) * (point[0] - screenCenterX) - Math.sin(angleRadians) * (point[1] - screenCenterY) + screenCenterX;
+    double rotatedY = Math.sin(angleRadians) * (point[0] - screenCenterX) + Math.cos(angleRadians) * (point[1] - screenCenterY) + screenCenterY;
+    
+    posIzquierdas.add(new float[]{(float)rotatedX, (float)rotatedY});
+  }
+}
+
+void setup()
+{
+  posIzquierdas = new ArrayList<float[]>();
+  interpolacion();
+  size(800,600);
+  for (float[] o : posIzquierdas) {
+    println(o[0] + " , " + o[1]);
+  }
+}
+
+void draw() 
+{
+  background(0);
+  translate(width/2, height/2);
+  stroke(255,0,0);
+  line(0,-1000,0,1000);
+
+}
