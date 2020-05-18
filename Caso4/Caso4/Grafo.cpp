@@ -5,7 +5,7 @@
 //#include <wctype.h>
 //#include <stdio.h>
 
-void Grafo::nuevaRelacion(std::wstring pPalabraSalida, std::wstring pPalabraLlegada)
+void Grafo::nuevaRelacion(std::wstring pPalabraSalida, std::wstring pPalabraLlegada) // F(n) = O(c)
 {
 	if (pPalabraSalida == pPalabraLlegada) return;
 
@@ -34,7 +34,7 @@ void Grafo::nuevaRelacion(std::wstring pPalabraSalida, std::wstring pPalabraLleg
 	nodoPrimeraPalabra->nuevaArista(nodoSegundaPalabra);
 }
 
-void Grafo::imprimirRelaciones(std::wstring pPalabra)
+void Grafo::imprimirRelaciones(std::wstring pPalabra) // F(n) = O(n)
 {
 	if (pPalabra.empty())
 	{
@@ -57,7 +57,7 @@ void Grafo::imprimirRelaciones(std::wstring pPalabra)
 	}
 }
 
-void Grafo::ordenarAristas()
+void Grafo::ordenarAristas() // F(n) = O(n)
 {
 	for (auto& it : vertices)
 	{
@@ -65,7 +65,7 @@ void Grafo::ordenarAristas()
 	}
 }
 
-void Grafo::ordenarVertices()
+void Grafo::ordenarVertices() // F(n) = O(nlogn)
 {
 	for (auto x : vertices) verticesOrdenados.push_back(x.second);
 
@@ -76,7 +76,7 @@ void Grafo::ordenarVertices()
 	);
 }
 
-void Grafo::asignarNextToVist()
+void Grafo::asignarNextToVist() // F(n) = O(n)
 {
 	for (auto& it : vertices)
 	{
@@ -108,9 +108,9 @@ void Grafo::palabrasMenosPoderosas(std::wstring pPalabra) { //F(n) = O(c)
 	it->second->palabrasMenosPoderosas();
 }
 
-void Grafo::gruposDePoder(std::wstring pPalabra, int pK)
+void Grafo::gruposDePoder(std::wstring pPalabra, int pK) // F(n) = O(n) con n = k 
 {
-	mapVerticesType::iterator verticeInicial = vertices.find(pPalabra);
+	mapVerticesType::iterator verticeInicial = vertices.find(pPalabra); 
 	if (verticeInicial == vertices.end()) {
 		std::wcout << L"\nLa palabra no existe en el Grafo";
 		return;
@@ -151,7 +151,7 @@ void Grafo::gruposDePoder(std::wstring pPalabra, int pK)
 	El nextToVisit permite que se vuelva a aun vertice porque las relaciones son con direccion.
 	Y al utilizar esta direccion el nextToVisit se actualiza para apuntar a otra relacion.
 */
-std::wstring Grafo::buscarCaminoMasPoderoso(Vertice* pVerticeSalida, int pGroupSize)
+std::wstring Grafo::buscarCaminoMasPoderoso(Vertice* pVerticeSalida, int pGroupSize) // F(n) = O(n) con n = cantidad de aristas
 {
 	std::wstring camino;
 	Vertice* verticeActual = pVerticeSalida;
