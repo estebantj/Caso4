@@ -14,7 +14,8 @@
 #include "Grafo.h"
 #include <Windows.h>
 #include <istream>
-#include <iostream>  
+#include <iostream>
+#include "parte2.h"
 
 static Grafo estructura;	
 //typedef basic_istream<wchar_t> wistream;
@@ -91,15 +92,15 @@ void leerArchivo()
 
 void loopPreguntas() {
 	int entrada = 0;
-	std::wstring  textoIntro = L"Presione \n1: Resolver el problema a)\n2: Resolver el problema b)\n3: Resolver el problema c)\n4: Imprimir todas las relaciones\n5: CLS\n6: Salir\n";;
+	std::wstring  textoIntro = L"Presione \n1: Resolver el problema a)\n2: Resolver el problema b)\n3: Resolver el problema c)\n4: Imprimir todas las relaciones\n5: CLS\n6: Imprimir parte 2\n6: Salir\n";;
 	std::wstring palabra;
 	int cantidadMasPoderosas = 0;
 	int k = 0;
-	while (entrada != 6) {
+	while (entrada != 7) {
 		
 		std::wcout << textoIntro;
 		std::wcin >> entrada;
-		if (entrada > 0 && entrada < 6) {
+		if (entrada > 0 && entrada < 7) {
 			switch (entrada)
 				{
 				case 1:
@@ -136,6 +137,9 @@ void loopPreguntas() {
 				case 5: 
 					system("CLS");
 					break;
+				case 6:
+					generarPuntos();
+					break;
 				default:
 					break;
 			}
@@ -148,6 +152,7 @@ void loopPreguntas() {
 		}
 	}
 }
+
 
 int wmain()
 {

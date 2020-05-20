@@ -142,10 +142,12 @@
   <ItemGroup>
     <ClCompile Include="Grafo.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="parte2.cpp" />
     <ClCompile Include="Vertice.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Grafo.h" />
+    <ClInclude Include="parte2.h" />
     <ClInclude Include="Vertice.h" />
     <ClInclude Include="Variables.h" />
   </ItemGroup>
