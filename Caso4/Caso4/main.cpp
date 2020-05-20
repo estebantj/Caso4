@@ -92,7 +92,7 @@ void leerArchivo()
 
 void loopPreguntas() {
 	int entrada = 0;
-	std::wstring  textoIntro = L"Presione \n1: Resolver el problema a)\n2: Resolver el problema b)\n3: Resolver el problema c)\n4: Imprimir todas las relaciones\n5: CLS\n6: Imprimir parte 2\n6: Salir\n";;
+	std::wstring  textoIntro = L"Presione \n1: Resolver el problema a)\n2: Resolver el problema b)\n3: Resolver el problema c)\n4: Imprimir todas las relaciones\n5: Imprimir parte 2\n6: CLS\n7: Salir\n";;
 	std::wstring palabra;
 	int cantidadMasPoderosas = 0;
 	int k = 0;
@@ -135,10 +135,10 @@ void loopPreguntas() {
 					palabra.clear();
 					break;
 				case 5: 
-					system("CLS");
+					generarPuntos();
 					break;
 				case 6:
-					generarPuntos();
+					system("CLS");
 					break;
 				default:
 					break;
