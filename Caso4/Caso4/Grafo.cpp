@@ -10,9 +10,9 @@ void Grafo::nuevaRelacion(std::wstring pPalabraSalida, std::wstring pPalabraLleg
 	if (pPalabraSalida == pPalabraLlegada) return;
 
 	mapVerticesType::iterator primeraPalabra = vertices.find(pPalabraSalida);
+	mapVerticesType::iterator segundaPalabra = vertices.find(pPalabraLlegada);
 	Vertice* nodoPrimeraPalabra = nullptr;
 	Vertice* nodoSegundaPalabra = nullptr;
-	mapVerticesType::iterator segundaPalabra = vertices.find(pPalabraLlegada);
 	
 	if (primeraPalabra == vertices.end())
 	{
@@ -88,13 +88,18 @@ void Grafo::asignarNextToVist() // F(n) = O(n)
 void Grafo::palabrasMasPoderosas(int cantidad) //F(n) = O(n) siendo el n la cantidad de elementos solicitados
 {
 
-	if (verticesOrdenados.size() < cantidad) { //2 tiempos
-		std::wcout << L"\nNo existen tantos vertices en la estructura"; //1 tiempo
-		return; //1 tiempo
+	if (verticesOrdenados.size() < cantidad) {
+		std::wcout << L"\nNo existen tantos vertices en la estructura";
+		return;
 	}
-	std::wcout << L"\nLas " + std::to_wstring(cantidad) + L" palabras con mayor poder son las siguientes: \n"; //3 tiempos
+
+	std::wcout << L"\nLas palabras con mayor poder son las siguientes: \n";
 	
-	for (int i = 0; i < cantidad; i++) std::wcout << verticesOrdenados.at(i)->palabra + L": con un poder de " + std::to_wstring(verticesOrdenados.at(i)->poder) + L"\n";
+	for (int i = 0; i < cantidad; i++)
+	{
+		if (verticesOrdenados.at(i)->poder == 0) break;
+		std::wcout << verticesOrdenados.at(i)->palabra + L": con un poder de " + std::to_wstring(verticesOrdenados.at(i)->poder) + L"\n";
+	}
 	//for tiene tiempo n donde la n es cantidad
 
 }
@@ -157,7 +162,7 @@ std::wstring Grafo::buscarCaminoMasPoderoso(Vertice* pVerticeSalida, int pGroupS
 	Vertice* verticeActual = pVerticeSalida;
 	int actualGroupSize = 0;
 	
-	while (actualGroupSize < pGroupSize) {
+	while (actualGroupSize <= pGroupSize) {
 		camino += verticeActual->palabra + L" -> ";
 
 		std::vector<Arista*>::iterator* nextToVisit = &verticeActual->nextToVisit;

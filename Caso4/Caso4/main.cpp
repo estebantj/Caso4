@@ -46,7 +46,6 @@ void leerArchivo()
 				{
 					if (caracter == '\n') 
 					{
-						//TODO: Needs to be checked
 						for (int i = 0; i < arraySize - 1; i++)
 						{
 							lastWords[i].clear();
@@ -152,7 +151,6 @@ void loopPreguntas() {
 		}
 	}
 }
-
 
 int wmain()
 {

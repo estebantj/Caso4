@@ -6,60 +6,50 @@ double angle = -7;
 float x = 0, y = -100;
 float x2 = 0, y2 = 100;
 float screenCenterX = 0, screenCenterY = 0;
-
 int cantidadDeCirculos = 5, radioInicial = 50;
 
-vector<pair<float, float>> posIzquierdas;
-vector<pair<float, float>> posDerechas;
+vector<pair<float, float>> posiciones;
 
 void interpolacion()
 {
     // Posiciones para los circulso de la izquierda
     // Primeros 180 grados
     int cantPosiciones = 180 / (int)abs((float)angle);
-    posIzquierdas.push_back(make_pair(x, y));
-    posDerechas.push_back(make_pair(x2, y2));
+    posiciones.push_back(make_pair(x, y));
 
-    auto iteradorIzq = posIzquierdas.begin();
-    auto iteradorDer = posDerechas.begin();
+    auto iteradorIzq = posiciones.begin();
+    double angleRadians = (angle) * (M_PI / 180); // Convert to radians
+    double calculatedCos = cos(angleRadians);
+    double calculatedSin = sin(angleRadians);
 
-    for (int i = 0; i <= cantPosiciones; i++) {
+    for (int i = 0; i <= cantPosiciones*2; i++) {
 
-        pair<float, float> point = posIzquierdas.back();
+        pair<float, float> point = posiciones.back();
+        double pointX = (double)point.first - screenCenterX;
+        double pointY = (double)point.second - screenCenterY;
+        double rotatedXIzquierda = calculatedCos * (pointX) - calculatedSin * (pointY) + screenCenterX;
+        double rotatedYIzquierda = calculatedSin * (pointX) + calculatedCos * (pointY) + screenCenterY;
 
-        double angleRadians = (angle) * (M_PI / 180); // Convert to radians
-        double rotatedXIzquierda = cos(angleRadians) * ((double)point.first - screenCenterX) - sin(angleRadians) * ((double)point.second - screenCenterY) + screenCenterX;
-        double rotatedYIzquierda = sin(angleRadians) * ((double)point.first - screenCenterX) + cos(angleRadians) * ((double)point.second - screenCenterY) + screenCenterY;
+        posiciones.push_back(pair<float, float>((float)rotatedXIzquierda, (float)rotatedYIzquierda));
 
-        posIzquierdas.push_back(pair<float, float>((float)rotatedXIzquierda, (float)rotatedYIzquierda));
-
-        point = posDerechas.back();
-
-        double rotatedXDerecha = cos(angleRadians) * ((double)point.first - screenCenterX) - sin(angleRadians) * ((double)point.second - screenCenterY) + screenCenterX;
-        double rotatedYDerecha = sin(angleRadians) * ((double)point.first - screenCenterX) + cos(angleRadians) * ((double)point.second - screenCenterY) + screenCenterY;
-
-        posDerechas.push_back(pair<float, float>((float)rotatedXDerecha, (float)rotatedYDerecha));
-
-        if (i == cantPosiciones / 2) angle = -1 * angle;
+        if (i == cantPosiciones) angle = -1 * angle;
     }
 }
 
 void draw() {
     int posActual = 0;
-    vector<pair<float, float>>::iterator iteradorDer = posDerechas.begin();
-    vector<pair<float, float>>::iterator iteradorIzq = posIzquierdas.begin();
+    vector<pair<float, float>>::iterator iteradorIzq = posiciones.begin();
 
     while (true) {
 
-        if (posActual == posIzquierdas.size() - 1) {
+        if (posActual == posiciones.size() - 1) {
             posActual = 0;
-            vector<pair<float, float>>::iterator iteradorDer = posDerechas.begin();
-            vector<pair<float, float>>::iterator iteradorIzq = posIzquierdas.begin();
+            vector<pair<float, float>>::iterator iteradorIzq = posiciones.begin();
         }
 
         pair<float, float> point = (*iteradorIzq);
-        pair<float, float> point2 = (*iteradorDer);;
         int multiplicador = 1, radioTotal;
+
         for (int i = 0; i < cantidadDeCirculos; i++) {
 
             radioTotal = radioInicial * multiplicador;
@@ -68,22 +58,23 @@ void draw() {
             cout << point.first;
             cout << point.second;
             cout << radioTotal << endl;
-            cout << point2.first;
-            cout << point2.second;
+            cout << point.first*-1;
+            cout << point.second*-1;
             cout << radioTotal << endl;
 
             multiplicador += 2;
         }
         posActual++;
-        iteradorDer++;
         iteradorIzq++;
     }
 }
+
 void generarPuntos() {
+    
     interpolacion();
 
     wcout << "Posiciones del circulo izquierdo:\n";
-    for (pair<float, float> posicion : posIzquierdas)
+    for (pair<float, float> posicion : posiciones)
     {
         wcout << posicion.first << "," << posicion.second;
         wcout << " -> ";
@@ -91,9 +82,9 @@ void generarPuntos() {
     wcout << "\n" << endl;
 
     wcout << "Posiciones del circulo derecho:\n";
-    for (pair<float, float> posicion : posDerechas)
+    for (pair<float, float> posicion : posiciones)
     {
-        wcout << posicion.first << "," << posicion.second;
+        wcout << posicion.first*-1 << "," << posicion.second*-1;
         wcout << " -> ";
     }
 
